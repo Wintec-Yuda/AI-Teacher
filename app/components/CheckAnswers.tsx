@@ -1,8 +1,6 @@
-"use client";
-
 import React from "react";
 import { Box, Button, CircularProgress, Paper, Typography } from "@mui/material";
-import ReactMarkdown from "react-markdown";
+import MarkdownWithProperHtml from "./MarkdownWithProperHtml";
 
 interface CheckAnswersProps {
   feedback: string;
@@ -34,7 +32,7 @@ const CheckAnswers: React.FC<CheckAnswersProps> = ({
             Feedback:
           </Typography>
           <Typography style={{ whiteSpace: "pre-wrap" }}>
-            <ReactMarkdown>{feedback}</ReactMarkdown>
+            <MarkdownWithProperHtml content={feedback} />
           </Typography>
         </Paper>
       )}

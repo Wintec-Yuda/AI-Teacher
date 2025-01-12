@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Box,
@@ -9,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import ReactMarkdown from "react-markdown";
+import MarkdownWithProperHtml from "./MarkdownWithProperHtml";
 
 interface QuestionsProps {
   questions: string[];
@@ -61,9 +59,7 @@ const Questions: React.FC<QuestionsProps> = ({
           </Typography>
           {questions.map((q, i) => (
             <Box key={i} marginBottom={2}>
-              <Typography>
-                <ReactMarkdown>{q}</ReactMarkdown>
-              </Typography>
+              <MarkdownWithProperHtml content={q} />
               <TextField
                 label={`Answer ${i + 1}`}
                 variant="outlined"

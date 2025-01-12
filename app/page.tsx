@@ -7,7 +7,7 @@ import CheckAnswers from "./components/CheckAnswers";
 import Material from "./components/Material";
 
 export default function Home() {
-  const [material, setMaterial] = useState<string>("");
+  const [materials, setMaterials] = useState<string[]>([]);
   const [questions, setQuestions] = useState<string[]>([]);
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string>("");
@@ -19,6 +19,7 @@ export default function Home() {
   const [numQuestions, setNumQuestions] = useState<number>(5);
   const [activeTab, setActiveTab] = useState<number>(0);
   const [selectedLanguage, setSelectedLanguage] = useState("indonesia"); // "id" untuk Bahasa Indonesia, "en" untuk English
+  const [currentPage, setCurrentPage] = useState(0);
 
   const handleGenerateMaterial = async () => {
     setLoading(true);
@@ -35,7 +36,10 @@ export default function Home() {
       });
 
       const data = await response.json();
-      setMaterial(data.material);
+
+      materials.push(data.material);
+
+      setCurrentPage((prevPage) => prevPage + 1);
     } catch (error) {
       console.error("Error generating material:", error);
     } finally {
@@ -93,6 +97,21 @@ export default function Home() {
     }
   };
 
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
+
+  const itemsPerPage = 1; // You can adjust this based on how many materials per page you want
+  const totalPages = Math.ceil(materials.length / itemsPerPage);
+  // Slice the materials to show only the current page's materials
+  const currentMaterials = materials.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <Container maxWidth="md">
       <Typography variant="h3" align="center" gutterBottom>
@@ -110,13 +129,17 @@ export default function Home() {
           selectedSchoolLevel={selectedSchoolLevel}
           selectedTopic={selectedTopic}
           selectedDifficultyLevel={selectedDifficultyLevel}
-          material={material}
+          materials={materials}
           loading={loading}
           setSelectedLanguage={setSelectedLanguage}
           setSelectedSchoolLevel={setSelectedSchoolLevel}
           setSelectedTopic={setSelectedTopic}
           setSelectedDifficultyLevel={setSelectedDifficultyLevel}
           handleGenerateMaterial={handleGenerateMaterial}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          handleChangePage={handleChangePage}
+          currentMaterials={currentMaterials}
         />
       )}
 

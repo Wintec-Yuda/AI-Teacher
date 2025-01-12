@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import {
   Button,
@@ -12,7 +10,8 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import ReactMarkdown from "react-markdown";
+import Pagination from "@mui/material/Pagination";
+import MarkdownWithProperHtml from "./MarkdownWithProperHtml";
 
 const difficultyLevels = Array.from({ length: 10 }, (_, index) => index + 1);
 const topicsBySchoolLevel = {
@@ -56,13 +55,17 @@ interface MaterialProps {
   selectedSchoolLevel: string;
   selectedTopic: string;
   selectedDifficultyLevel: number;
-  material: string;
+  materials: string[];
   loading: boolean;
+  totalPages: number;
+  currentPage: number;
+  currentMaterials: string[];
   setSelectedLanguage: (value: string) => void;
   setSelectedSchoolLevel: (value: string) => void;
   setSelectedTopic: (value: string) => void;
   setSelectedDifficultyLevel: (value: number) => void;
   handleGenerateMaterial: () => void;
+  handleChangePage: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
 const Material: React.FC<MaterialProps> = ({
@@ -70,13 +73,17 @@ const Material: React.FC<MaterialProps> = ({
   selectedSchoolLevel,
   selectedTopic,
   selectedDifficultyLevel,
-  material,
+  materials,
   loading,
+  totalPages,
+  currentPage,
+  currentMaterials,
   setSelectedLanguage,
   setSelectedSchoolLevel,
   setSelectedTopic,
   setSelectedDifficultyLevel,
   handleGenerateMaterial,
+  handleChangePage,
 }) => {
   const availableTopics = selectedSchoolLevel
     ? topicsBySchoolLevel[
@@ -151,7 +158,7 @@ const Material: React.FC<MaterialProps> = ({
         </FormControl>
       </Box>
 
-      {!material && (
+      {materials.length === 0 && (
         <Box textAlign="center" marginBottom={3}>
           <Button
             variant="contained"
@@ -164,15 +171,41 @@ const Material: React.FC<MaterialProps> = ({
         </Box>
       )}
 
-      {material && (
-        <Paper elevation={3} style={{ padding: "20px", marginBottom: "20px" }}>
-          <Typography variant="h5" gutterBottom>
-            Study Material:
-          </Typography>
-          <Typography style={{ whiteSpace: "pre-wrap" }}>
-            <ReactMarkdown>{material}</ReactMarkdown>
-          </Typography>
-        </Paper>
+      {materials.length > 0 && (
+        <>
+          <Box marginBottom={2} textAlign="center">
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handleChangePage}
+              color="primary"
+            />
+          </Box>
+
+          <Paper elevation={3} style={{ padding: "20px", marginTop: "20px" }}>
+            <Typography variant="h5" gutterBottom>
+              Material {currentPage}
+            </Typography>
+            {Array.isArray(currentMaterials) && currentMaterials.length > 0 ? (
+              currentMaterials.map((material, index) => (
+                <MarkdownWithProperHtml content={material} key={index} />
+              ))
+            ) : (
+              <Typography>No material available for this page.</Typography>
+            )}
+
+            <Box textAlign="center" marginBottom={3} marginTop={3}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleGenerateMaterial}
+                disabled={loading || !selectedTopic || !selectedSchoolLevel}
+              >
+                {loading ? <CircularProgress size={24} /> : "Continue Learning"}
+              </Button>
+            </Box>
+          </Paper>
+        </>
       )}
     </>
   );
