@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Box, Button, CircularProgress, Paper, Typography } from "@mui/material";
+import ReactMarkdown from "react-markdown";
 
 interface CheckAnswersProps {
   feedback: string;
@@ -32,7 +33,9 @@ const CheckAnswers: React.FC<CheckAnswersProps> = ({
           <Typography variant="h5" gutterBottom>
             Feedback:
           </Typography>
-          <Typography style={{ whiteSpace: "pre-wrap" }}>{feedback}</Typography>
+          <Typography style={{ whiteSpace: "pre-wrap" }}>
+            <ReactMarkdown>{feedback}</ReactMarkdown>
+          </Typography>
         </Paper>
       )}
     </>

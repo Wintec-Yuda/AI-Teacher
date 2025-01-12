@@ -9,6 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import ReactMarkdown from "react-markdown";
 
 interface QuestionsProps {
   questions: string[];
@@ -60,12 +61,15 @@ const Questions: React.FC<QuestionsProps> = ({
           </Typography>
           {questions.map((q, i) => (
             <Box key={i} marginBottom={2}>
-              <Typography>{`${q}`}</Typography>
+              <Typography>
+                <ReactMarkdown>{q}</ReactMarkdown>
+              </Typography>
               <TextField
                 label={`Answer ${i + 1}`}
                 variant="outlined"
                 fullWidth
                 value={userAnswers[i] || ""}
+                multiline
                 onChange={(e) => {
                   const updatedAnswers = [...userAnswers];
                   updatedAnswers[i] = e.target.value;

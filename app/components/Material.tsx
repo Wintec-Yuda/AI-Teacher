@@ -12,6 +12,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
+import ReactMarkdown from "react-markdown";
 
 const difficultyLevels = Array.from({ length: 10 }, (_, index) => index + 1);
 const topicsBySchoolLevel = {
@@ -168,7 +169,9 @@ const Material: React.FC<MaterialProps> = ({
           <Typography variant="h5" gutterBottom>
             Study Material:
           </Typography>
-          <Typography style={{ whiteSpace: "pre-wrap" }}>{material}</Typography>
+          <Typography style={{ whiteSpace: "pre-wrap" }}>
+            <ReactMarkdown>{material}</ReactMarkdown>
+          </Typography>
         </Paper>
       )}
     </>
