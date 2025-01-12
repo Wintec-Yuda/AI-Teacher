@@ -14,15 +14,50 @@ import {
 } from "@mui/material";
 
 const difficultyLevels = Array.from({ length: 10 }, (_, index) => index + 1);
+const topicsBySchoolLevel = {
+  TK: ["Basic Math Operations", "English", "Art", "Music"],
+  SD: ["Basic Math Operations", "English", "Science", "History", "Geography"],
+  SMP: ["Algebra", "Geometry", "Biology", "Physics", "History"],
+  SMA: [
+    "Algebra",
+    "Geometry",
+    "Trigonometry",
+    "Physics",
+    "Chemistry",
+    "Biology",
+  ],
+  SMK: ["Computer Science", "Physics", "Chemistry", "English", "Mathematics"],
+  Diploma: ["Computer Science", "Mathematics", "Chemistry", "Physics"],
+  "Sarjana 1": [
+    "Calculus",
+    "Computer Science",
+    "Physics",
+    "Economics",
+    "Literature",
+  ],
+  "Sarjana 2": [
+    "Advanced Physics",
+    "Advanced Calculus",
+    "Machine Learning",
+    "Philosophy",
+  ],
+  "Sarjana 3": [
+    "Quantum Physics",
+    "Artificial Intelligence",
+    "Research Methods",
+    "Ethics",
+  ],
+  Doctor: ["Research Methods", "Advanced Statistics", "Philosophy", "Medicine"],
+};
 
 interface MaterialProps {
-  topicsBySchoolLevel: { [key: string]: string[] };
   selectedLanguage: string;
   selectedSchoolLevel: string;
   selectedTopic: string;
   selectedDifficultyLevel: number;
   material: string;
   loading: boolean;
+  setSelectedLanguage: (value: string) => void;
   setSelectedSchoolLevel: (value: string) => void;
   setSelectedTopic: (value: string) => void;
   setSelectedDifficultyLevel: (value: number) => void;
@@ -30,13 +65,13 @@ interface MaterialProps {
 }
 
 const Material: React.FC<MaterialProps> = ({
-  topicsBySchoolLevel,
   selectedLanguage,
   selectedSchoolLevel,
   selectedTopic,
   selectedDifficultyLevel,
   material,
   loading,
+  setSelectedLanguage,
   setSelectedSchoolLevel,
   setSelectedTopic,
   setSelectedDifficultyLevel,
@@ -50,6 +85,20 @@ const Material: React.FC<MaterialProps> = ({
 
   return (
     <>
+      <Box marginBottom={3}>
+        <FormControl fullWidth>
+          <InputLabel>Language</InputLabel>
+          <Select
+            value={selectedLanguage}
+            onChange={(e) => setSelectedLanguage(e.target.value as string)}
+            label="Select Language"
+          >
+            <MenuItem value="indonesia">Bahasa Indonesia</MenuItem>
+            <MenuItem value="english">English</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
       <Box marginBottom={3}>
         <FormControl fullWidth>
           <InputLabel>School Level</InputLabel>

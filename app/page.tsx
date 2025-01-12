@@ -6,44 +6,6 @@ import Questions from "./components/Questions";
 import CheckAnswers from "./components/CheckAnswers";
 import Material from "./components/Material";
 
-const topicsBySchoolLevel = {
-  TK: ["Basic Math Operations", "English", "Art", "Music"],
-  SD: ["Basic Math Operations", "English", "Science", "History", "Geography"],
-  SMP: ["Algebra", "Geometry", "Biology", "Physics", "History"],
-  SMA: [
-    "Algebra",
-    "Geometry",
-    "Trigonometry",
-    "Physics",
-    "Chemistry",
-    "Biology",
-  ],
-  SMK: ["Computer Science", "Physics", "Chemistry", "English", "Mathematics"],
-  Diploma: ["Computer Science", "Mathematics", "Chemistry", "Physics"],
-  "Sarjana 1": [
-    "Calculus",
-    "Computer Science",
-    "Physics",
-    "Economics",
-    "Literature",
-  ],
-  "Sarjana 2": [
-    "Advanced Physics",
-    "Advanced Calculus",
-    "Machine Learning",
-    "Philosophy",
-  ],
-  "Sarjana 3": [
-    "Quantum Physics",
-    "Artificial Intelligence",
-    "Research Methods",
-    "Ethics",
-  ],
-  Doctor: ["Research Methods", "Advanced Statistics", "Philosophy", "Medicine"],
-};
-
-const difficultyLevels = Array.from({ length: 10 }, (_, index) => index + 1); // Levels 1-10
-
 export default function Home() {
   const [material, setMaterial] = useState<string>("");
   const [questions, setQuestions] = useState<string[]>([]);
@@ -57,12 +19,6 @@ export default function Home() {
   const [numQuestions, setNumQuestions] = useState<number>(5);
   const [activeTab, setActiveTab] = useState<number>(0);
   const [selectedLanguage, setSelectedLanguage] = useState("indonesia"); // "id" untuk Bahasa Indonesia, "en" untuk English
-
-  const availableTopics = selectedSchoolLevel
-    ? (topicsBySchoolLevel[
-        selectedSchoolLevel as keyof typeof topicsBySchoolLevel
-      ] as string[])
-    : [];
 
   const handleGenerateMaterial = async () => {
     setLoading(true);
@@ -150,13 +106,13 @@ export default function Home() {
 
       {activeTab === 0 && (
         <Material
-          topicsBySchoolLevel={topicsBySchoolLevel}
-          selectedLanguage="indonesia"
+          selectedLanguage={selectedLanguage}
           selectedSchoolLevel={selectedSchoolLevel}
           selectedTopic={selectedTopic}
           selectedDifficultyLevel={selectedDifficultyLevel}
           material={material}
           loading={loading}
+          setSelectedLanguage={setSelectedLanguage}
           setSelectedSchoolLevel={setSelectedSchoolLevel}
           setSelectedTopic={setSelectedTopic}
           setSelectedDifficultyLevel={setSelectedDifficultyLevel}
