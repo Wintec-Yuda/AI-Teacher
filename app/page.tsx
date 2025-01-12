@@ -1,21 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Button,
-  Container,
-  Typography,
-  CircularProgress,
-  Paper,
-  Box,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-  TextField,
-  Tabs,
-  Tab,
-} from "@mui/material";
+import { Container, Typography, Tabs, Tab } from "@mui/material";
+import Questions from "./components/Questions";
+import CheckAnswers from "./components/CheckAnswers";
+import Material from "./components/Material";
 
 const topicsBySchoolLevel = {
   TK: ["Basic Math Operations", "English", "Art", "Music"],
@@ -149,231 +138,50 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="md" style={{ padding: "20px" }}>
+    <Container maxWidth="md">
       <Typography variant="h3" align="center" gutterBottom>
         AI Teacher
       </Typography>
-
-      {/* Tab Navigation */}
-      <Tabs
-        value={activeTab}
-        onChange={(event, newValue) => setActiveTab(newValue)}
-        indicatorColor="primary"
-        textColor="primary"
-        centered
-      >
+      <Tabs value={activeTab} onChange={(e, val) => setActiveTab(val)} centered>
         <Tab label="Material" />
         <Tab label="Questions" />
         <Tab label="Check Answers" />
       </Tabs>
 
-      {/* Select Language */}
       {activeTab === 0 && (
-        <Box marginBottom={3}>
-          <FormControl fullWidth>
-            <InputLabel>Language</InputLabel>
-            <Select
-              value={selectedLanguage}
-              onChange={(e) => setSelectedLanguage(e.target.value as string)}
-              label="Select Language"
-            >
-              <MenuItem value="indonesia">Bahasa Indonesia</MenuItem>
-              <MenuItem value="english">English</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+        <Material
+          topicsBySchoolLevel={topicsBySchoolLevel}
+          selectedLanguage="indonesia"
+          selectedSchoolLevel={selectedSchoolLevel}
+          selectedTopic={selectedTopic}
+          selectedDifficultyLevel={selectedDifficultyLevel}
+          material={material}
+          loading={loading}
+          setSelectedSchoolLevel={setSelectedSchoolLevel}
+          setSelectedTopic={setSelectedTopic}
+          setSelectedDifficultyLevel={setSelectedDifficultyLevel}
+          handleGenerateMaterial={handleGenerateMaterial}
+        />
       )}
 
-      {/* Select School Level */}
-      {activeTab === 0 && (
-        <Box marginBottom={3}>
-          <FormControl fullWidth>
-            <InputLabel>School Level</InputLabel>
-            <Select
-              value={selectedSchoolLevel}
-              onChange={(e) => setSelectedSchoolLevel(e.target.value as string)}
-              label="Select School Level"
-            >
-              {Object.keys(topicsBySchoolLevel).map((level, index) => (
-                <MenuItem key={index} value={level}>
-                  {level}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
-      )}
-
-      {/* Materi Tab */}
-      {activeTab === 0 && (
-        <>
-          {/* Select Topic */}
-          <Box marginBottom={3}>
-            <FormControl fullWidth>
-              <InputLabel>Topic</InputLabel>
-              <Select
-                value={selectedTopic}
-                onChange={(e) => setSelectedTopic(e.target.value as string)}
-                label="Select Topic"
-              >
-                {availableTopics.map((topic, index) => (
-                  <MenuItem key={index} value={topic}>
-                    {topic}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-
-          {/* Select Difficulty Level */}
-          <Box marginBottom={3}>
-            <FormControl fullWidth>
-              <InputLabel>Difficulty Level</InputLabel>
-              <Select
-                value={selectedDifficultyLevel}
-                onChange={(e) =>
-                  setSelectedDifficultyLevel(Number(e.target.value))
-                }
-                label="Select Difficulty Level"
-              >
-                {difficultyLevels.map((level) => (
-                  <MenuItem key={level} value={level}>
-                    {level}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-
-          {/* Generate Material Button */}
-          {!material && (
-            <Box textAlign="center" marginBottom={3}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleGenerateMaterial}
-                disabled={
-                  loading ||
-                  !selectedTopic ||
-                  !selectedSchoolLevel ||
-                  !selectedDifficultyLevel
-                }
-              >
-                {loading ? <CircularProgress size={24} /> : "Generate Material"}
-              </Button>
-            </Box>
-          )}
-
-          {material && (
-            <Paper
-              elevation={3}
-              style={{ padding: "20px", marginBottom: "20px" }}
-            >
-              <Typography variant="h5" gutterBottom>
-                Study Material:
-              </Typography>
-              <Typography style={{ whiteSpace: "pre-wrap" }}>
-                {material}
-              </Typography>
-            </Paper>
-          )}
-        </>
-      )}
-
-      {/* Questions Tab */}
       {activeTab === 1 && (
-        <>
-          <Box marginBottom={3}>
-            <TextField
-              label="Number of Questions"
-              type="number"
-              value={numQuestions}
-              onChange={(e) => setNumQuestions(Number(e.target.value))}
-              fullWidth
-              inputProps={{ min: 1 }}
-            />
-          </Box>
-
-          {/* Generate Questions Button */}
-          <Box textAlign="center" marginBottom={3}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleGenerateQuestions}
-              disabled={
-                loading ||
-                !selectedTopic ||
-                !selectedSchoolLevel ||
-                !selectedDifficultyLevel
-              }
-            >
-              {loading ? (
-                <CircularProgress size={24} />
-              ) : (
-                "Proceed to Questions"
-              )}
-            </Button>
-          </Box>
-
-          {/* Questions */}
-          {questions.length > 0 && (
-            <Paper
-              elevation={3}
-              style={{ padding: "20px", marginBottom: "20px" }}
-            >
-              <Typography variant="h5" gutterBottom>
-                Questions:
-              </Typography>
-              {questions.map((q, i) => (
-                <Box key={i} marginBottom={2}>
-                  <Typography>{`${q}`}</Typography>
-                  {/* Input for Answer */}
-                  <TextField
-                    label={`Answer ${i + 1}`}
-                    variant="outlined"
-                    fullWidth
-                    value={userAnswers[i] || ""}
-                    onChange={(e) => {
-                      const updatedAnswers = [...userAnswers];
-                      updatedAnswers[i] = e.target.value;
-                      setUserAnswers(updatedAnswers);
-                    }}
-                    style={{ marginTop: "10px" }}
-                  />
-                </Box>
-              ))}
-            </Paper>
-          )}
-        </>
+        <Questions
+          questions={questions}
+          userAnswers={userAnswers}
+          numQuestions={numQuestions}
+          loading={loading}
+          setNumQuestions={setNumQuestions}
+          setUserAnswers={setUserAnswers}
+          handleGenerateQuestions={handleGenerateQuestions}
+        />
       )}
 
-      {/* Check Answers Tab */}
       {activeTab === 2 && (
-        <>
-          {/* Submit Answers Button */}
-          <Box textAlign="center" marginTop={3}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleCheckAnswers}
-              disabled={loading}
-            >
-              {loading ? <CircularProgress size={24} /> : "Submit Answers"}
-            </Button>
-          </Box>
-
-          {/* Feedback */}
-          {feedback && (
-            <Paper elevation={3} style={{ padding: "20px" }}>
-              <Typography variant="h5" gutterBottom>
-                Feedback:
-              </Typography>
-              <Typography style={{ whiteSpace: "pre-wrap" }}>
-                {feedback}
-              </Typography>
-            </Paper>
-          )}
-        </>
+        <CheckAnswers
+          feedback={feedback}
+          loading={loading}
+          handleCheckAnswers={handleCheckAnswers}
+        />
       )}
     </Container>
   );
