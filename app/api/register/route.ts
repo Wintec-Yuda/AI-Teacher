@@ -1,12 +1,12 @@
 // app/api/register/route.ts
-import { register } from '@/app/lib/firebase/authServices';
+import authService from '@/app/lib/firebase/authServices';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
-  
-    const result = await register(email, password);
+    const { name, role, email, password } = await request.json();
+
+    const result = await authService.register(name, role, email, password);
 
     if (result.error) {
       return NextResponse.json({ error: result.error }, { status: 400 });

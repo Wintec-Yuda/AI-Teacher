@@ -27,7 +27,7 @@ const topicsBySchoolLevel = {
     "Biology",
   ],
   SMK: ["Computer Science", "Physics", "Chemistry", "English", "Mathematics"],
-  Diploma: ["Computer Science", "Mathematics", "Chemistry", "Physics"],
+  Diploma: ["Computer Science", "Mathematics", "Chemistry", "Physics", "Electrical engineering", "Internet Of Things"],
   "Sarjana 1": [
     "Calculus",
     "Computer Science",

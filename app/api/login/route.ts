@@ -1,13 +1,12 @@
 // app/api/login/route.ts
-import { login } from '@/app/lib/firebase/authServices';
-import { stat } from 'fs';
+import authService from '@/app/lib/firebase/authServices';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
     
-    const result = await login(email, password);
+    const result = await authService.login(email, password);
   
     if (result.error) {
       return NextResponse.json({ error: result.error }, { status: 400 });
