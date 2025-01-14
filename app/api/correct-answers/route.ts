@@ -7,66 +7,57 @@ export async function POST(req: Request) {
   try {
     const { questions, userAnswers, language } = await req.json();
 
-    // Validasi input
-    // if (!Array.isArray(questions) || !Array.isArray(userAnswers)) {
-    //   return NextResponse.json(
-    //     {
-    //       status: "error",
-    //       message: "Invalid input: questions and userAnswers should be arrays.",
-    //     },
-    //     { status: 400 }
-    //   );
-    // }
-
-    // if (questions.length !== userAnswers.length) {
-    //   return NextResponse.json(
-    //     {
-    //       status: "error",
-    //       message: "The number of questions and user answers must be the same.",
-    //     },
-    //     { status: 400 }
-    //   );
-    // }
-
-    // if (!language || typeof language !== "string") {
-    //   return NextResponse.json(
-    //     {
-    //       status: "error",
-    //       message: "Invalid input: 'language' must be a string.",
-    //     },
-    //     { status: 400 }
-    //   );
-    // }
-
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     // Create a detailed prompt with the provided language
     const prompt = `
-You are a math teacher. Here are some math problems with answers from a student. 
-Evaluate each answer, provide the correct answer for any wrong answers, 
-and include an explanation for the correct solution.
+You are an expert math educator. Below are math problems along with my answers. 
+Evaluate each answer, provide the correct solution if the answer is wrong, and include a detailed explanation for the correct solution.
 
 Problems:
 ${questions.map((q: string, i: number) => `${i + 1}. ${q}`).join("\n")}
 
-Student Answers:
+My Answers:
 ${userAnswers.map((a: string, i: number) => `${i + 1}. ${a}`).join("\n")}
 
-Language: ${language}
+Instructions:
+1. Evaluate each answer and assign points based on correctness and the difficulty of the question.
+2. Each question has a specific score range (1 - 20) depending on its difficulty.
+3. For each incorrect answer, provide the correct answer and a clear, step-by-step explanation of how to arrive at the correct solution.
+4. For each correct answer, state: "Correct. Explanation: [detailed explanation of the correct solution]."
+5. For each incorrect answer, state: "Incorrect. The correct answer is [correct answer]. Explanation: [detailed explanation of the correct solution]."
+6. Assign partial points if the answer is close to the correct one, with a percentage of the full score.
 
-Provide feedback in the following format:
-- For correct answers: "Correct. Explanation: [detailed explanation]."
-- For incorrect answers: "Incorrect. The correct answer is [correct answer]. Explanation: [detailed explanation of the correct solution]."
+Scoring System:
+Question Weight:
+  - Each question is assigned a specific weight between 1 and 20 points based on its difficulty.
+Answer Scoring:
+  - Correct Answer: Full score awarded.
+  - Incorrect Answer: No points awarded.
+  - Partial Answer: Award partial points if the answer is close to correct, based on the level of accuracy.
 
-Additionally, calculate the final score (out of 100) based on the number of correct answers. The final score is calculated as follows:
+Final Score Calculation:
+  - Total Questions: ${questions.length}.
+  - Correct Answers: The number of correct answers is [correctAnswers].
+  - Total Score: The final score is calculated as the sum of points for each question, which is then normalized to a range of 1 - 100.
 
+Additionally, provide a summary of my performance:
 - Number of Correct Answers: [correctAnswers]
-- Total Number of Questions: ${questions.length}
-- Final Score: [score]%
+- Final Score: [score] (range 1 - 100)
+- Summary: [Overall assessment of my performance, strengths, and areas for improvement].
 
-Provide a summary of the student's performance, including the total score and an overall assessment. Ensure the explanations are clear and helpful for the student to learn.
+Visuals:
+- If any visuals are needed in the solution, please use icons to enhance understanding.
+
+Please make sure to provide helpful and constructive feedback in the chosen language.  
+${
+  language === "indonesia"
+    ? "Pastikan memberikan umpan balik yang membangun dalam bahasa Indonesia."
+    : "Please make sure to provide helpful and constructive feedback in English."
+}
 `;
+
 
     const result = await model.generateContent(prompt);
 

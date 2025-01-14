@@ -59,6 +59,9 @@ const Questions: React.FC<QuestionsProps> = ({
           </Typography>
           {questions.map((q, i) => (
             <Box key={i} marginBottom={2}>
+              <Typography variant="h6" gutterBottom>
+                Question {i + 1}:
+              </Typography>
               <MarkdownWithProperHtml content={q} />
               <TextField
                 label={`Answer ${i + 1}`}

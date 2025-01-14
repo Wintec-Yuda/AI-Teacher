@@ -26,9 +26,6 @@ const Navbar = () => {
 
   const menuItems = [
     { label: 'Home', link: '/' },
-    { label: 'Classes', link: '/classes' },
-    { label: 'Login', link: '/login' },
-    { label: 'Register', link: '/register' },
   ];
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {

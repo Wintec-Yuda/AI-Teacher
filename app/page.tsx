@@ -12,8 +12,9 @@ export default function Home() {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [selectedTopic, setSelectedTopic] = useState<string>("English");
-  const [selectedSchoolLevel, setSelectedSchoolLevel] = useState<string>("TK");
+  const [selectedTopic, setSelectedTopic] = useState<string>("");
+  const [selectedSubTopic, setSelectedSubTopic] = useState<string>("");
+  const [selectedSchoolLevel, setSelectedSchoolLevel] = useState<string>("");
   const [selectedDifficultyLevel, setSelectedDifficultyLevel] =
     useState<number>(1);
   const [numQuestions, setNumQuestions] = useState<number>(5);
@@ -29,6 +30,7 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           topic: selectedTopic,
+          subTopic: selectedSubTopic,
           schoolLevel: selectedSchoolLevel,
           difficultyLevel: selectedDifficultyLevel,
           language: selectedLanguage,
@@ -56,6 +58,7 @@ export default function Home() {
         body: JSON.stringify({
           numQuestions,
           topic: selectedTopic,
+          subTopic: selectedSubTopic,
           schoolLevel: selectedSchoolLevel,
           difficultyLevel: selectedDifficultyLevel,
           language: selectedLanguage,
@@ -128,12 +131,14 @@ export default function Home() {
           selectedLanguage={selectedLanguage}
           selectedSchoolLevel={selectedSchoolLevel}
           selectedTopic={selectedTopic}
+          selectedSubTopic={selectedSubTopic}
           selectedDifficultyLevel={selectedDifficultyLevel}
           materials={materials}
           loading={loading}
           setSelectedLanguage={setSelectedLanguage}
           setSelectedSchoolLevel={setSelectedSchoolLevel}
           setSelectedTopic={setSelectedTopic}
+          setSelectedSubTopic={setSelectedSubTopic}
           setSelectedDifficultyLevel={setSelectedDifficultyLevel}
           handleGenerateMaterial={handleGenerateMaterial}
           totalPages={totalPages}

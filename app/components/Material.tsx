@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   CircularProgress,
@@ -12,53 +12,15 @@ import {
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import MarkdownWithProperHtml from "./MarkdownWithProperHtml";
+import data from '../../data.json'; // Assuming you saved the topics data here
 
 const difficultyLevels = Array.from({ length: 10 }, (_, index) => index + 1);
-const topicsBySchoolLevel = {
-  TK: ["Basic Math Operations", "English", "Art", "Music"],
-  SD: ["Basic Math Operations", "English", "Science", "History", "Geography"],
-  SMP: ["Algebra", "Geometry", "Biology", "Physics", "History"],
-  SMA: [
-    "Algebra",
-    "Geometry",
-    "English",
-    "Trigonometry",
-    "Physics",
-    "Chemistry",
-    "Biology",
-  ],
-  SMK: ["Computer Science", "Physics", "Chemistry", "English", "Mathematics"],
-  Diploma: ["Computer Science", "Mathematics", "Chemistry", "English", "Physics", "Electrical engineering", "Internet Of Things"],
-  "Sarjana 1": [
-    "Calculus",
-    "Computer Science",
-    "Physics",
-    "Economics",
-    "Literature",
-    "English",
-  ],
-  "Sarjana 2": [
-    "Advanced Physics",
-    "Advanced Calculus",
-    "Machine Learning",
-    "Philosophy",
-    "English",
-  ],
-  "Sarjana 3": [
-    "Quantum Physics",
-    "Artificial Intelligence",
-    "Research Methods",
-    "Ethics",
-    "Philosophy",
-    "English",
-  ],
-  Doctor: ["Research Methods", "Advanced Statistics", "Philosophy", "Medicine", "English"],
-};
 
 interface MaterialProps {
   selectedLanguage: string;
   selectedSchoolLevel: string;
   selectedTopic: string;
+  selectedSubTopic: string;
   selectedDifficultyLevel: number;
   materials: string[];
   loading: boolean;
@@ -68,6 +30,7 @@ interface MaterialProps {
   setSelectedLanguage: (value: string) => void;
   setSelectedSchoolLevel: (value: string) => void;
   setSelectedTopic: (value: string) => void;
+  setSelectedSubTopic: (value: string) => void;
   setSelectedDifficultyLevel: (value: number) => void;
   handleGenerateMaterial: () => void;
   handleChangePage: (event: React.ChangeEvent<unknown>, value: number) => void;
@@ -77,6 +40,7 @@ const Material: React.FC<MaterialProps> = ({
   selectedLanguage,
   selectedSchoolLevel,
   selectedTopic,
+  selectedSubTopic,
   selectedDifficultyLevel,
   materials,
   loading,
@@ -86,14 +50,19 @@ const Material: React.FC<MaterialProps> = ({
   setSelectedLanguage,
   setSelectedSchoolLevel,
   setSelectedTopic,
+  setSelectedSubTopic,
   setSelectedDifficultyLevel,
   handleGenerateMaterial,
   handleChangePage,
 }) => {
-  const availableTopics = selectedSchoolLevel
-    ? topicsBySchoolLevel[
-        selectedSchoolLevel as keyof typeof topicsBySchoolLevel
-      ]
+
+const availableTopics = selectedSchoolLevel
+  ? Object.keys(data[selectedSchoolLevel])
+  : [];
+
+const availableSubTopics =
+  selectedSchoolLevel && selectedTopic
+    ? data[selectedSchoolLevel][selectedTopic].subtopics
     : [];
 
   return (
@@ -120,7 +89,7 @@ const Material: React.FC<MaterialProps> = ({
             onChange={(e) => setSelectedSchoolLevel(e.target.value)}
             label="Select School Level"
           >
-            {Object.keys(topicsBySchoolLevel).map((level, index) => (
+            {Object.keys(data).map((level, index) => (
               <MenuItem key={index} value={level}>
                 {level}
               </MenuItem>
@@ -140,6 +109,24 @@ const Material: React.FC<MaterialProps> = ({
             {availableTopics.map((topic, index) => (
               <MenuItem key={index} value={topic}>
                 {topic}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
+
+      <Box marginBottom={3}>
+        <FormControl fullWidth>
+          <InputLabel>Sub Topic</InputLabel>
+          <Select
+            value={selectedSubTopic}
+            onChange={(e) => setSelectedSubTopic(e.target.value)}
+            label="Select Sub Topic"
+            disabled={!selectedTopic}
+          >
+            {availableSubTopics.map((subTopic: string, index: number) => (
+              <MenuItem key={index} value={subTopic}>
+                {subTopic}
               </MenuItem>
             ))}
           </Select>

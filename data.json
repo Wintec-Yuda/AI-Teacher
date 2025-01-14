@@ -1,0 +1,73 @@
+{
+  "TK": {
+    "Basic Math Operations": {
+      "subtopics": ["Addition", "Subtraction", "Multiplication"]
+    },
+    "English": {
+      "subtopics": ["Alphabet", "Vocabulary", "Simple Sentences"]
+    },
+    "Art": {
+      "subtopics": ["Painting", "Drawing"]
+    },
+    "Music": {
+      "subtopics": ["Instruments", "Songs"]
+    }
+  },
+  "SD": {
+    "Basic Math Operations": {
+      "subtopics": ["Addition", "Subtraction", "Multiplication", "Division"]
+    },
+    "English": {
+      "subtopics": ["Vocabulary", "Grammar", "Reading Comprehension"]
+    },
+    "Science": {
+      "subtopics": ["Plants", "Animals", "Earth Science"]
+    },
+    "History": {
+      "subtopics": ["Ancient Civilizations", "World Wars"]
+    },
+    "Geography": {
+      "subtopics": ["Continents", "Countries", "Rivers"]
+    }
+  },
+  "SMP": {
+    "Algebra": {
+      "subtopics": ["Linear Equations", "Polynomials"]
+    },
+    "Geometry": {
+      "subtopics": ["Angles", "Shapes"]
+    },
+    "Biology": {
+      "subtopics": ["Plants", "Animals"]
+    },
+    "Physics": {
+      "subtopics": ["Motion", "Forces"]
+    },
+    "History": {
+      "subtopics": ["Modern History", "Ancient Civilizations"]
+    }
+  },
+  "SMA": {
+    "Algebra": {
+      "subtopics": ["Linear Equations", "Quadratic Equations"]
+    },
+    "Geometry": {
+      "subtopics": ["Circles", "Triangles"]
+    },
+    "English": {
+      "subtopics": ["Literature", "Grammar"]
+    },
+    "Trigonometry": {
+      "subtopics": ["Sine", "Cosine", "Tangent"]
+    },
+    "Physics": {
+      "subtopics": ["Mechanics", "Electricity"]
+    },
+    "Chemistry": {
+      "subtopics": ["Atoms", "Molecules"]
+    },
+    "Biology": {
+      "subtopics": ["Genetics", "Cells"]
+    }
+  }
+}
