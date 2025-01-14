@@ -21,33 +21,38 @@ const topicsBySchoolLevel = {
   SMA: [
     "Algebra",
     "Geometry",
+    "English",
     "Trigonometry",
     "Physics",
     "Chemistry",
     "Biology",
   ],
   SMK: ["Computer Science", "Physics", "Chemistry", "English", "Mathematics"],
-  Diploma: ["Computer Science", "Mathematics", "Chemistry", "Physics", "Electrical engineering", "Internet Of Things"],
+  Diploma: ["Computer Science", "Mathematics", "Chemistry", "English", "Physics", "Electrical engineering", "Internet Of Things"],
   "Sarjana 1": [
     "Calculus",
     "Computer Science",
     "Physics",
     "Economics",
     "Literature",
+    "English",
   ],
   "Sarjana 2": [
     "Advanced Physics",
     "Advanced Calculus",
     "Machine Learning",
     "Philosophy",
+    "English",
   ],
   "Sarjana 3": [
     "Quantum Physics",
     "Artificial Intelligence",
     "Research Methods",
     "Ethics",
+    "Philosophy",
+    "English",
   ],
-  Doctor: ["Research Methods", "Advanced Statistics", "Philosophy", "Medicine"],
+  Doctor: ["Research Methods", "Advanced Statistics", "Philosophy", "Medicine", "English"],
 };
 
 interface MaterialProps {

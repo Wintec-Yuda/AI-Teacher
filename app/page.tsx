@@ -12,8 +12,8 @@ export default function Home() {
   const [userAnswers, setUserAnswers] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [selectedTopic, setSelectedTopic] = useState<string>("");
-  const [selectedSchoolLevel, setSelectedSchoolLevel] = useState<string>("");
+  const [selectedTopic, setSelectedTopic] = useState<string>("English");
+  const [selectedSchoolLevel, setSelectedSchoolLevel] = useState<string>("TK");
   const [selectedDifficultyLevel, setSelectedDifficultyLevel] =
     useState<number>(1);
   const [numQuestions, setNumQuestions] = useState<number>(5);
