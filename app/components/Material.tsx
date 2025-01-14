@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Button,
   CircularProgress,
@@ -68,7 +68,7 @@ const availableSubTopics =
   return (
     <>
       <Box marginBottom={3}>
-        <FormControl fullWidth>
+        <FormControl fullWidth disabled={materials.length > 0}>
           <InputLabel>Language</InputLabel>
           <Select
             value={selectedLanguage}
@@ -82,7 +82,7 @@ const availableSubTopics =
       </Box>
 
       <Box marginBottom={3}>
-        <FormControl fullWidth>
+        <FormControl fullWidth disabled={materials.length > 0}>
           <InputLabel>School Level</InputLabel>
           <Select
             value={selectedSchoolLevel}
@@ -99,7 +99,7 @@ const availableSubTopics =
       </Box>
 
       <Box marginBottom={3}>
-        <FormControl fullWidth>
+        <FormControl fullWidth disabled={materials.length > 0}>
           <InputLabel>Topic</InputLabel>
           <Select
             value={selectedTopic}
@@ -116,16 +116,16 @@ const availableSubTopics =
       </Box>
 
       <Box marginBottom={3}>
-        <FormControl fullWidth>
+        <FormControl fullWidth disabled={materials.length > 0}>
           <InputLabel>Sub Topic</InputLabel>
           <Select
             value={selectedSubTopic}
             onChange={(e) => setSelectedSubTopic(e.target.value)}
             label="Select Sub Topic"
-            disabled={!selectedTopic}
+            disabled={!selectedTopic || materials.length > 0}
           >
             {availableSubTopics.map((subTopic: string, index: number) => (
-              <MenuItem key={index} value={subTopic}>
+              <MenuItem key={index} value={subTopic} >
                 {subTopic}
               </MenuItem>
             ))}
@@ -134,7 +134,7 @@ const availableSubTopics =
       </Box>
 
       <Box marginBottom={3}>
-        <FormControl fullWidth>
+        <FormControl fullWidth disabled={materials.length > 0}>
           <InputLabel>Difficulty Level</InputLabel>
           <Select
             value={selectedDifficultyLevel}

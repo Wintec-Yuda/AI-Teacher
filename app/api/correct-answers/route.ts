@@ -12,52 +12,58 @@ export async function POST(req: Request) {
 
     // Create a detailed prompt with the provided language
     const prompt = `
-You are an expert math educator. Below are math problems along with my answers. 
-Evaluate each answer, provide the correct solution if the answer is wrong, and include a detailed explanation for the correct solution.
+You are an expert math educator tasked with evaluating student responses. Please analyze the following math problems and provide detailed feedback:
 
-Problems:
-${questions.map((q: string, i: number) => `${i + 1}. ${q}`).join("\n")}
+PROBLEMS:
+${questions
+  .map(
+    (q: string, i: number) => `
+question ${i + 1} [${questions[i]}]:
+${q}
+Student's Answer: ${userAnswers[i]}
+`
+  )
+  .join("\n")}
 
-My Answers:
-${userAnswers.map((a: string, i: number) => `${i + 1}. ${a}`).join("\n")}
+Please provide:
 
-Instructions:
-1. Evaluate each answer and assign points based on correctness and the difficulty of the question.
-2. Each question has a specific score range (1 - 20) depending on its difficulty.
-3. For each incorrect answer, provide the correct answer and a clear, step-by-step explanation of how to arrive at the correct solution.
-4. For each correct answer, state: "Correct. Explanation: [detailed explanation of the correct solution]."
-5. For each incorrect answer, state: "Incorrect. The correct answer is [correct answer]. Explanation: [detailed explanation of the correct solution]."
-6. Assign partial points if the answer is close to the correct one, with a percentage of the full score.
+1. Scoring Breakdown:
+- Problem-wise Scores: Detailed scoring for each individual question.
+- Point Deduction Explanation: Clear explanations for any points deducted, including the reasoning behind each deduction.
+- Final Score: The total score, normalized to a 100-point scale, reflecting overall performance.
 
-Scoring System:
-Question Weight:
-  - Each question is assigned a specific weight between 1 and 20 points based on its difficulty.
-Answer Scoring:
-  - Correct Answer: Full score awarded.
-  - Incorrect Answer: No points awarded.
-  - Partial Answer: Award partial points if the answer is close to correct, based on the level of accuracy.
 
-Final Score Calculation:
-  - Total Questions: ${questions.length}.
-  - Correct Answers: The number of correct answers is [correctAnswers].
-  - Total Score: The final score is calculated as the sum of points for each question, which is then normalized to a range of 1 - 100.
+2. DETAILED FEEDBACK
+For each problem:
+- Correctness assessment
+- Step-by-step solution explanation
+- Common misconceptions (if applicable)
+- Tips for improvement
 
-Additionally, provide a summary of my performance:
-- Number of Correct Answers: [correctAnswers]
-- Final Score: [score] (range 1 - 100)
-- Summary: [Overall assessment of my performance, strengths, and areas for improvement].
+3. OVERALL EVALUATION
+- Strengths demonstrated
+- Areas for improvement
+- Suggested practice topics
 
-Visuals:
-- If any visuals are needed in the solution, please use icons to enhance understanding.
+Language: ${language}
 
-Please make sure to provide helpful and constructive feedback in the chosen language.  
-${
-  language === "indonesia"
-    ? "Pastikan memberikan umpan balik yang membangun dalam bahasa Indonesia."
-    : "Please make sure to provide helpful and constructive feedback in English."
-}
+Formatting Guidelines:
+- Use clear headings and subheadings
+- Include step-by-step explanations
+- Highlight key concepts
+- Use mathematical notation when appropriate
+- Maintain consistent language throughout (${language})
+- Keep tone encouraging and constructive
+
+If visual explanations would be helpful, please include simple ASCII diagrams or suggest appropriate visual aids.
+
+Please ensure all feedback is:
+- Age-appropriate
+- Clear and concise
+- Constructive
+- Aligned with educational best practices
+- Written in ${language}
 `;
-
 
     const result = await model.generateContent(prompt);
 

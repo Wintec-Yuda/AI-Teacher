@@ -6,12 +6,18 @@ interface CheckAnswersProps {
   feedback: string;
   loading: boolean;
   handleCheckAnswers: () => void;
+  materials: string[];
+  questions: string[];
+  userAnswers: string[];
 }
 
 const CheckAnswers: React.FC<CheckAnswersProps> = ({
   feedback,
   loading,
   handleCheckAnswers,
+  materials,
+  questions,
+  userAnswers,
 }) => {
   return (
     <>
@@ -20,7 +26,7 @@ const CheckAnswers: React.FC<CheckAnswersProps> = ({
           variant="contained"
           color="secondary"
           onClick={handleCheckAnswers}
-          disabled={loading}
+          disabled={loading || materials.length == 0 || questions.length == 0 || userAnswers.length == 0}
         >
           {loading ? <CircularProgress size={24} /> : "Submit Answers"}
         </Button>

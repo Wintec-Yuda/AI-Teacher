@@ -18,21 +18,26 @@ export async function POST(req: Request) {
 
     // Create a more detailed prompt to generate questions with additional parameters
     const prompt = `
+Please create ${numQuestions} essay-style questions on the topic of "${topic}" with a focus on the subtopic "${subTopic}". The questions should be designed to stimulate critical thinking and require students to engage deeply with the material. Ensure that the questions meet the following criteria:
+1. Grade Level: Tailor the questions to the appropriate cognitive level for "${schoolLevel}" students, considering their developmental stage and reasoning abilities.
+2. Difficulty: Set the questions at a "${difficultyLevel}" level, challenging students to think critically and apply their knowledge, without making them excessively difficult or overwhelming.
+3. Language: All questions should be in "${language}" and appropriate for the language proficiency of the students. Ensure clarity and precision in the phrasing.
+4. Critical Thinking: The questions should encourage students to:
+   - Analyze concepts in depth, breaking down ideas into their components.
+   - Evaluate arguments, solutions, or methods, providing reasoned judgments.
+   - Synthesize information from various sources or perspectives, creating new connections or solutions.
+   - Reflect on the broader implications of the topic on personal, societal, or global levels.
+5. Clarity & Precision: Ensure all questions are clear and concise, without ambiguity, allowing students to focus on critical thinking and argumentation.
+6. Progressive Complexity: Arrange the questions in a manner that starts with foundational concepts and gradually leads to more advanced questions that require deeper analysis and synthesis.
+7. Question Variety: Provide a mix of essay question types, such as:
+   - Comparative analysis: Ask students to compare and contrast two different approaches, theories, or ideas.
+   - Evaluative reasoning: Challenge students to assess the strengths and weaknesses of a particular solution or argument.
+   - Problem-solving: Present a real-world issue related to the topic and ask students to propose a solution.
+   - Reflection: Ask students to reflect on the personal, societal, or global impact of the topic and critically examine its relevance.
+8. Justification of Answers: Each question should encourage students to justify their answers with logical reasoning, evidence, and examples to support their conclusions.
+Please provide only the essay questions in a numbered list. Do not include answers or explanations.
+`;
 
-      You are an experienced and highly skilled educator. Please Create ${numQuestions} questions thoughtfully crafted questions on the topic of "${topic}" with a focus on the subtopic "${subTopic}". The questions should adhere to the following criteria:
-
-- School Level: Ensure the questions are appropriate for the school level of "${schoolLevel}".
-- Difficulty: Adjust the difficulty level to be "${difficultyLevel}", providing a balance that challenges students without overwhelming them.
-- Language: The questions must be in "${language}" and tailored to the language proficiency of the students.
-- Critical Thinking: Each question should stimulate critical thinking, requiring students to apply concepts rather than merely recall information. The questions should avoid being overly simplistic or rote and should encourage deeper problem-solving and analysis.
-- Clarity: All questions should be clear, concise, and free from ambiguity, ensuring that students can easily understand what is being asked.
-- Variety: Include a variety of question formats—such as multiple-choice, short-answer, and open-ended questions—so that different aspects of students' understanding are assessed.
-- Scaffolded Learning: Arrange the questions in a progressive manner, beginning with foundational concepts and advancing to more complex problems. This structure should help students build their knowledge and confidence step by step.
-- Visuals: If visuals are necessary, use icons instead of images to help illustrate concepts, ensuring that the visuals are clear and appropriate for the content.
-
-Please provide only the questions in a numbered list. Do not include answers or explanations, as the goal is to stimulate thought and foster deeper learning.
-
-    `;
 
     // Generate content with the AI model
     const result = await model.generateContent(prompt);

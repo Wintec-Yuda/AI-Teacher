@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ interface QuestionsProps {
   setNumQuestions: (value: number) => void;
   setUserAnswers: (value: string[]) => void;
   handleGenerateQuestions: () => void;
+  materials: string[];
 }
 
 const Questions: React.FC<QuestionsProps> = ({
@@ -27,7 +28,28 @@ const Questions: React.FC<QuestionsProps> = ({
   setNumQuestions,
   setUserAnswers,
   handleGenerateQuestions,
+  materials,
 }) => {
+  // State untuk error validation
+  const [errors, setErrors] = useState<boolean[]>([]);
+
+  // Validasi sebelum mengirimkan jawaban
+  const handleValidation = () => {
+    const newErrors = questions.map((_, i) => !userAnswers[i]?.trim());
+    setErrors(newErrors);
+    return !newErrors.some((error) => error);
+  };
+
+  // Submit jawaban
+  const handleSubmitAnswers = () => {
+    if (handleValidation()) {
+      // Proses kirim jawaban
+      console.log("Jawaban berhasil dikirim:", userAnswers);
+    } else {
+      console.log("Harap isi semua jawaban.");
+    }
+  };
+
   return (
     <>
       <Box marginBottom={3}>
@@ -37,7 +59,7 @@ const Questions: React.FC<QuestionsProps> = ({
           value={numQuestions}
           onChange={(e) => setNumQuestions(Number(e.target.value))}
           fullWidth
-          inputProps={{ min: 1 }}
+          inputProps={{ min: 2 }}
         />
       </Box>
 
@@ -46,7 +68,7 @@ const Questions: React.FC<QuestionsProps> = ({
           variant="contained"
           color="secondary"
           onClick={handleGenerateQuestions}
-          disabled={loading}
+          disabled={loading || materials.length == 0 || questions.length > 0}
         >
           {loading ? <CircularProgress size={24} /> : "Generate Questions"}
         </Button>
@@ -73,11 +95,27 @@ const Questions: React.FC<QuestionsProps> = ({
                   const updatedAnswers = [...userAnswers];
                   updatedAnswers[i] = e.target.value;
                   setUserAnswers(updatedAnswers);
+
+                  // Reset error saat pengguna mengetik
+                  const updatedErrors = [...errors];
+                  updatedErrors[i] = !e.target.value.trim();
+                  setErrors(updatedErrors);
                 }}
+                error={!!errors[i]}
+                helperText={errors[i] ? "Answer cannot be empty." : ""}
                 style={{ marginTop: "10px" }}
               />
             </Box>
           ))}
+          <Box textAlign="center" marginTop={3}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleSubmitAnswers}
+            >
+              Submit Answers
+            </Button>
+          </Box>
         </Paper>
       )}
     </>

@@ -19,21 +19,19 @@ export async function POST(req: Request) {
 
     // Create a well-structured prompt incorporating all inputs
     const prompt = `
-    You are an AI expert educator. Create detailed, self-contained study material for the topic: "${topic}" and subtopic: "${subTopic}", tailored to the school level: "${schoolLevel}" and difficulty level: "${difficultyLevel}". The study material should meet the following criteria:
-
-- Clarity and Simplicity: The material should be clear, easy to understand, and suitable for beginners. Avoid overly technical language or jargon that may confuse the target audience.
-- Structure and Organization: Provide well-structured content that is easy to follow, starting with fundamental concepts and progressing to more complex ideas.
-- Step-by-Step Explanations: Each concept should be explained with step-by-step breakdowns to ensure gradual learning.
-- Real-World Examples: Include real-world examples and practical applications of the concepts to make the material relatable and engaging.
-- Practical Guidance: Offer hands-on activities or practical exercises that allow learners to apply what they have learned in a real-world context.
-- Independent Learning: The content should facilitate independent learning, so that students can understand and complete the material without requiring external guidance.
-- Relevance: Ensure the content is up-to-date, accurate, and directly relevant to the topic, keeping in mind current trends and knowledge in the field.
-- Language and Terminology: Use language and terminology that is appropriate for the audience, ensuring accessibility and understanding at the specified school level and difficulty.
-- Visuals: Instead of using images, incorporate icons or diagrams to support explanations where necessary, enhancing comprehension and engagement.
-
-  Please write the material in the language: "${language}", ensuring clarity and appropriateness for the target audience.
-  Make sure the content is up-to-date, well-structured, and provides a mix of theory and interactive elements like exercises or quizzes.
+You are an AI expert educator. Please create detailed, self-contained study material for the topic: "${topic}" and subtopic: "${subTopic}", tailored to the school level: "${schoolLevel}" and difficulty level: "${difficultyLevel}". The study material should meet the following criteria:
+1. Clarity and Simplicity: The material should be straightforward and easy to understand, suitable for beginners. Avoid technical jargon or overly complex language that could confuse students.
+2. Structure and Organization: Organize the content in a logical and coherent way, starting with basic concepts and progressively introducing more advanced topics. Each section should flow naturally to the next.
+3. Step-by-Step Explanations: Provide clear, step-by-step breakdowns of concepts to ensure that learners can grasp each idea before moving to the next. Each explanation should be simple and direct, guiding the student through the learning process.
+4. Real-World Examples: Integrate practical examples that demonstrate how the topic and subtopic apply to real-world situations. This will help students connect theoretical knowledge with tangible applications.
+5. Practical Guidance: Include exercises, activities, or practical applications that allow students to directly apply what they’ve learned. This hands-on approach will help reinforce key concepts.
+6. Independent Learning: Ensure the content is designed for independent learning. Students should be able to understand and progress through the material on their own, with clear instructions and well-paced challenges.
+7. Relevance and Accuracy: The material must be up-to-date, accurate, and relevant to the topic and subtopic. Stay current with the latest trends, knowledge, and advancements in the field, ensuring that the content aligns with the latest educational standards.
+8. Language and Terminology: Use language and terminology that is appropriate for the target audience. Ensure accessibility by adjusting complexity to match the specified school level and difficulty. Avoid overly technical language unless it’s necessary for the learning process.
+9. Visuals: Use icons, diagrams, or simplified visuals (instead of images) to support explanations. These visuals should be clear, relevant, and enhance the student's understanding of complex concepts.
+Please write the material in "${language}", ensuring that it is clear, engaging, and accessible for the target audience. The material should include a combination of theoretical explanations and interactive elements like quizzes, exercises, or discussion prompts to facilitate deeper learning and engagement.
 `;
+
 
     // Generate content with the AI model
     const result = await model.generateContent(prompt);

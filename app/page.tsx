@@ -157,6 +157,7 @@ export default function Home() {
           setNumQuestions={setNumQuestions}
           setUserAnswers={setUserAnswers}
           handleGenerateQuestions={handleGenerateQuestions}
+          materials={materials}
         />
       )}
 
@@ -165,6 +166,9 @@ export default function Home() {
           feedback={feedback}
           loading={loading}
           handleCheckAnswers={handleCheckAnswers}
+          materials={materials}
+          questions={questions}
+          userAnswers={userAnswers}
         />
       )}
     </Container>
