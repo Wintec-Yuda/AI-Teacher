@@ -1,14 +1,12 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-// Ensure the environment variable for the API key is set
-const apiKey = process.env.GOOGLE_API_KEY as string; // Sesuaikan dengan API yang digunakan
+const apiKey = process.env.GOOGLE_API_KEY as string;
 
 if (!apiKey) {
   throw new Error("GOOGLE_API_KEY is not defined in environment variables.");
 }
 
-// Define a POST function for generating questions
 export async function POST(req: Request) {
   try {
     const { numQuestions, topic, subTopic, schoolLevel, difficultyLevel, language } = await req.json();
@@ -16,7 +14,6 @@ export async function POST(req: Request) {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Create a more detailed prompt to generate questions with additional parameters
     const prompt = `
 Please create ${numQuestions} essay-style questions on the topic of "${topic}" with a focus on the subtopic "${subTopic}". The questions should be designed to stimulate critical thinking and require students to engage deeply with the material. Ensure that the questions meet the following criteria:
 1. Grade Level: Tailor the questions to the appropriate cognitive level for "${schoolLevel}" students, considering their developmental stage and reasoning abilities.
@@ -38,37 +35,20 @@ Please create ${numQuestions} essay-style questions on the topic of "${topic}" w
 Please provide only the essay questions in a numbered list. Do not include answers or explanations.
 `;
 
-
-    // Generate content with the AI model
     const result = await model.generateContent(prompt);
 
-    const questions = result.response.text();
+    const data = result.response.text();
 
-    // Handle case where questions could not be generated
-    if (!questions) {
-      return NextResponse.json(
-        {
-          status: "error",
-          message: "Failed to generate questions.",
-        },
-        { status: 500 }
-      );
-    }
-
-    // Return generated questions
     return NextResponse.json({
       status: "success",
       message: "Questions generated successfully.",
-      questions,
+      data,
     });
   } catch (error: any) {
-    // Catch and log any unexpected errors
-    console.error("Error generating questions:", error);
-
     return NextResponse.json(
       {
         status: "error",
-        message: error.message || "An unexpected error occurred.",
+        message: "Failed to generate questions.",
       },
       { status: 500 }
     );

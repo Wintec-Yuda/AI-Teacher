@@ -1,14 +1,11 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-// Ensure the environment variable for the API key is set
-const apiKey = process.env.GOOGLE_API_KEY as string; // Pastikan ini menggunakan API Key yang sesuai
-
+const apiKey = process.env.GOOGLE_API_KEY as string;
 if (!apiKey) {
   throw new Error("GOOGLE_API_KEY is not defined in environment variables.");
 }
 
-// Define a POST function for generating study material
 export async function POST(req: Request) {
   try {
     const { topic, subTopic, schoolLevel, difficultyLevel, language } =
@@ -17,7 +14,6 @@ export async function POST(req: Request) {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Create a well-structured prompt incorporating all inputs
     const prompt = `
 You are an AI expert educator. Please create detailed, self-contained study material for the topic: "${topic}" and subtopic: "${subTopic}", tailored to the school level: "${schoolLevel}" and difficulty level: "${difficultyLevel}". The study material should meet the following criteria:
 1. Clarity and Simplicity: The material should be straightforward and easy to understand, suitable for beginners. Avoid technical jargon or overly complex language that could confuse students.
@@ -33,36 +29,20 @@ Please write the material in "${language}", ensuring that it is clear, engaging,
 `;
 
 
-    // Generate content with the AI model
     const result = await model.generateContent(prompt);
 
-    const material = result.response.text(); // Access text result
+    const data = result.response.text();
 
-    // Handle case where material could not be generated
-    if (!material) {
-      return NextResponse.json(
-        {
-          status: "error",
-          message: "Failed to generate material.",
-        },
-        { status: 500 }
-      );
-    }
-
-    // Return generated study material
     return NextResponse.json({
       status: "success",
       message: "Material generated successfully.",
-      material,
+      data,
     });
   } catch (error: any) {
-    // Catch and log any unexpected errors
-    console.error("Error generating material:", error);
-
     return NextResponse.json(
       {
         status: "error",
-        message: error.message || "An unexpected error occurred.",
+        message: "Failed to generate material.",
       },
       { status: 500 }
     );

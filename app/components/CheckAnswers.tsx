@@ -1,32 +1,93 @@
 import React from "react";
-import { Box, Button, CircularProgress, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Paper,
+  Typography,
+} from "@mui/material";
 import MarkdownWithProperHtml from "./MarkdownWithProperHtml";
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveTab, setLoading } from "../lib/redux/slices/globalSlice";
+import { setFeedback, setIsResetted } from "../lib/redux/slices/answerSlice";
+import { CheckAnswersPayload } from "../types/payload";
+import {
+  setDifficultyLevel,
+  setLanguage,
+  setMaterials,
+  setSchoolLevel,
+  setSubTopic,
+  setTopic,
+} from "../lib/redux/slices/materialSlice";
+import {
+  setIsAnswered,
+  setNumQuestions,
+  setQuestions,
+  setUserAnswers,
+} from "../lib/redux/slices/questionSlice";
+import axios from "axios";
 
-interface CheckAnswersProps {
-  feedback: string;
-  loading: boolean;
-  handleCheckAnswers: () => void;
-  materials: string[];
-  questions: string[];
-  userAnswers: string[];
-}
+const CheckAnswers: React.FC = () => {
+  const { loading } = useSelector((state: any) => state.global);
+  const { feedback, isResetted } = useSelector((state: any) => state.answer);
+  useSelector((state: any) => state.material);
+  const { questions, userAnswers, isAnswered} = useSelector(
+    (state: any) => state.question
+  );
+  const { language } = useSelector((state: any) => state.material);
 
-const CheckAnswers: React.FC<CheckAnswersProps> = ({
-  feedback,
-  loading,
-  handleCheckAnswers,
-  materials,
-  questions,
-  userAnswers,
-}) => {
+  const dispatch = useDispatch();
+
+  const handleCheckAnswers = async () => {
+    dispatch(setLoading(true));
+    try {
+      const { data } = await axios.post("/api/check-answers", {
+        questions,
+        userAnswers,
+        language,
+      } as CheckAnswersPayload);
+      dispatch(setFeedback(data.data));
+    } catch (error: any) {
+      console.log("Failed to check answers");
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const handleResetted = () => {
+    dispatch(setTopic(""));
+    dispatch(setSubTopic(""));
+    dispatch(setSchoolLevel(""));
+    dispatch(setDifficultyLevel(1));
+    dispatch(setLanguage("indonesia"));
+    dispatch(setNumQuestions(5));
+    dispatch(setFeedback(""));
+    dispatch(setIsAnswered(false));
+    dispatch(setIsResetted(false));
+    dispatch(setActiveTab(0));
+    dispatch(setQuestions([]));
+    dispatch(setUserAnswers([]));
+    dispatch(setMaterials([]));
+  };
+
   return (
     <>
       <Box textAlign="center" marginTop={3}>
+        {isResetted && (
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleResetted}
+            disabled={loading}
+          >
+            {loading ? <CircularProgress size={24} /> : "Reset"}
+          </Button>
+        )}
         <Button
           variant="contained"
           color="secondary"
           onClick={handleCheckAnswers}
-          disabled={loading || materials.length == 0 || questions.length == 0 || userAnswers.length == 0}
+          disabled={loading || !isAnswered}
         >
           {loading ? <CircularProgress size={24} /> : "Submit Answers"}
         </Button>

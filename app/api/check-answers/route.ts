@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-const apiKey = process.env.GOOGLE_API_KEY as string; // Pastikan API key tidak null atau undefined.
+const apiKey = process.env.GOOGLE_API_KEY as string; 
 
 export async function POST(req: Request) {
   try {
@@ -10,7 +10,6 @@ export async function POST(req: Request) {
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Create a detailed prompt with the provided language
     const prompt = `
 You are an expert math educator tasked with evaluating student responses. Please analyze the following math problems and provide detailed feedback:
 
@@ -67,19 +66,18 @@ Please ensure all feedback is:
 
     const result = await model.generateContent(prompt);
 
-    const feedback = result.response.text();
+    const data = result.response.text();
 
     return NextResponse.json({
       status: "success",
       message: "Answers checked successfully",
-      feedback,
+      data,
     });
   } catch (error: any) {
-    console.error("Error during processing:", error); // Log for debugging
     return NextResponse.json(
       {
         status: "error",
-        message: error.message || "An unexpected error occurred.",
+        message: "Failed to check answers.",
       },
       { status: 500 }
     );

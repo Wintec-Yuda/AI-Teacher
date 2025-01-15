@@ -8,46 +8,88 @@ import {
   Typography,
 } from "@mui/material";
 import MarkdownWithProperHtml from "./MarkdownWithProperHtml";
-
-interface QuestionsProps {
-  questions: string[];
-  userAnswers: string[];
-  numQuestions: number;
-  loading: boolean;
-  setNumQuestions: (value: number) => void;
-  setUserAnswers: (value: string[]) => void;
-  handleGenerateQuestions: () => void;
-  materials: string[];
-}
-
-const Questions: React.FC<QuestionsProps> = ({
-  questions,
-  userAnswers,
-  numQuestions,
-  loading,
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveTab, setLoading } from "../lib/redux/slices/globalSlice";
+import {
+  setIsAnswered,
   setNumQuestions,
+  setQuestions,
   setUserAnswers,
-  handleGenerateQuestions,
-  materials,
-}) => {
-  // State untuk error validation
+} from "../lib/redux/slices/questionSlice";
+import { GenerateQuestionsPayload } from "../types/payload";
+import axios from "axios";
+
+const Questions: React.FC = () => {
   const [errors, setErrors] = useState<boolean[]>([]);
 
-  // Validasi sebelum mengirimkan jawaban
+  const {materials, topic, subTopic, schoolLevel, difficultyLevel, language} = useSelector((state: any) => state.material);
+  const { questions, numQuestions, userAnswers } =
+    useSelector((state: any) => state.question);
+  const { loading } = useSelector((state: any) => state.global);
+
+  const dispatch = useDispatch();
+
   const handleValidation = () => {
-    const newErrors = questions.map((_, i) => !userAnswers[i]?.trim());
+    const newErrors = questions.map(
+      (_: string, i: number) => !userAnswers[i]?.trim()
+    );
     setErrors(newErrors);
-    return !newErrors.some((error) => error);
+    return !newErrors.some((error: boolean) => error);
   };
 
-  // Submit jawaban
-  const handleSubmitAnswers = () => {
+  const handleSureAnswers = () => {
     if (handleValidation()) {
-      // Proses kirim jawaban
-      console.log("Jawaban berhasil dikirim:", userAnswers);
-    } else {
-      console.log("Harap isi semua jawaban.");
+      dispatch(setActiveTab(2));
+      dispatch(setIsAnswered(true));
     }
+  };
+
+  const handleSetNumQuestions = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newNumQuestions = Number(event.target.value);
+    dispatch(setNumQuestions(newNumQuestions));
+  };
+
+  const handleGenerateQuestions = async () => {
+    dispatch(setLoading(true));
+
+    try {
+      const { data } = await axios.post(
+        "/api/generate-questions",
+        {
+          topic,
+          subTopic,
+          schoolLevel,
+          difficultyLevel,
+          language,
+          numQuestions,
+        } as GenerateQuestionsPayload
+      );
+
+      const questionsArray = data.data
+        .split("\n")
+        .filter((q: string) => q.trim() !== "");
+      setQuestions(questionsArray);
+
+      dispatch(setQuestions(questionsArray));
+    } catch (error: any) {
+      console.log("Failed to generate questions", error);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const handleAnswers = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    i: number
+  ) => {
+    const updatedAnswers = [...userAnswers];
+    updatedAnswers[i] = event.target.value;
+    dispatch(setUserAnswers(updatedAnswers));
+    const updatedErrors = [...errors];
+    updatedErrors[i] = !event.target.value.trim();
+    setErrors(updatedErrors);
   };
 
   return (
@@ -57,7 +99,7 @@ const Questions: React.FC<QuestionsProps> = ({
           label="Number of Questions"
           type="number"
           value={numQuestions}
-          onChange={(e) => setNumQuestions(Number(e.target.value))}
+          onChange={handleSetNumQuestions}
           fullWidth
           inputProps={{ min: 2 }}
         />
@@ -79,7 +121,7 @@ const Questions: React.FC<QuestionsProps> = ({
           <Typography variant="h5" gutterBottom>
             Questions:
           </Typography>
-          {questions.map((q, i) => (
+          {questions.map((q: string, i: number) => (
             <Box key={i} marginBottom={2}>
               <Typography variant="h6" gutterBottom>
                 Question {i + 1}:
@@ -91,16 +133,9 @@ const Questions: React.FC<QuestionsProps> = ({
                 fullWidth
                 value={userAnswers[i] || ""}
                 multiline
-                onChange={(e) => {
-                  const updatedAnswers = [...userAnswers];
-                  updatedAnswers[i] = e.target.value;
-                  setUserAnswers(updatedAnswers);
-
-                  // Reset error saat pengguna mengetik
-                  const updatedErrors = [...errors];
-                  updatedErrors[i] = !e.target.value.trim();
-                  setErrors(updatedErrors);
-                }}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  handleAnswers(event, i)
+                }
                 error={!!errors[i]}
                 helperText={errors[i] ? "Answer cannot be empty." : ""}
                 style={{ marginTop: "10px" }}
@@ -111,9 +146,9 @@ const Questions: React.FC<QuestionsProps> = ({
             <Button
               variant="contained"
               color="primary"
-              onClick={handleSubmitAnswers}
+              onClick={handleSureAnswers}
             >
-              Submit Answers
+              Sure with the answers!
             </Button>
           </Box>
         </Paper>
