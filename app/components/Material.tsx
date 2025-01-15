@@ -9,6 +9,7 @@ import {
   Select,
   Typography,
   Box,
+  SelectChangeEvent,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import MarkdownWithProperHtml from "./MarkdownWithProperHtml";
@@ -25,6 +26,7 @@ import {
 import { GenerateMaterialPayload } from "../types/payload";
 import { setLoading } from "../lib/redux/slices/globalSlice";
 import axios from "axios";
+import { RootState } from "../types/state";
 
 const difficultyLevels = Array.from({ length: 10 }, (_, index) => index + 1);
 
@@ -32,17 +34,17 @@ const Material: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { materials, topic, subTopic, schoolLevel, difficultyLevel, language } =
-    useSelector((state: any) => state.material);
-  const { loading } = useSelector((state: any) => state.global);
+    useSelector((state: RootState) => state.material);
+  const { loading } = useSelector((state: RootState) => state.global);
 
   const dispatch = useDispatch();
 
-  const handleChangeLanguage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeLanguage = (event: SelectChangeEvent<string>) => {
     dispatch(setLanguage(event.target.value as string));
   };
 
   const handleChangeSchoolLevel = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: SelectChangeEvent<string>
   ) => {
     const newSchoolLevel = event.target.value as string;
     dispatch(setSchoolLevel(newSchoolLevel));
@@ -50,14 +52,19 @@ const Material: React.FC = () => {
     dispatch(setSubTopic(""));
   };
 
-  const handleChangeTopic = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeTopic = (event: SelectChangeEvent<string>) => {
     const newTopic = event.target.value as string;
     dispatch(setTopic(newTopic));
     dispatch(setSubTopic(""));
   };
 
-  const handleChangeSubTopic = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSubTopic = (event: SelectChangeEvent<string>) => {
     dispatch(setSubTopic(event.target.value as string));
+  };
+
+  const handleSetDifficultyLevel = (event: SelectChangeEvent<number>) => {
+    const newDifficultyLevel = Number(event.target.value as number);
+    dispatch(setDifficultyLevel(newDifficultyLevel));
   };
 
   const handleGenerateMaterials = async () => {
@@ -73,7 +80,7 @@ const Material: React.FC = () => {
 
       dispatch(addMaterial(data.data));
       setCurrentPage(materials.length + 1);
-    } catch (error: any) {
+    } catch {
       console.log("Failed to generate material");
     } finally {
       dispatch(setLoading(false));
@@ -84,13 +91,23 @@ const Material: React.FC = () => {
     setCurrentPage(page);
   };
 
+  const dataMaterial: {
+    [key: string]: {
+      [key: string]: {
+        subtopics: string[];
+      };
+    };
+  } = data;
+
   const availableTopics = schoolLevel
-    ? (Object.keys(data[schoolLevel as keyof typeof data]) as string[])
+    ? (Object.keys(dataMaterial[schoolLevel as keyof typeof data]) as string[])
     : [];
 
-  const availableSubTopics =
-    schoolLevel && topic ? data[schoolLevel][topic].subtopics : [];
-
+    const availableSubTopics =
+    schoolLevel && topic
+      ? dataMaterial[schoolLevel as keyof typeof data][topic].subtopics
+      : [];
+  
   const itemsPerPage = 1;
   const totalPages = Math.ceil(materials.length / itemsPerPage);
   const currentMaterials = materials.slice(
@@ -105,7 +122,7 @@ const Material: React.FC = () => {
           <InputLabel>Language</InputLabel>
           <Select
             value={language}
-            onChange={handleChangeLanguage}
+            onChange={handleChangeLanguage} 
             label="Select Language"
           >
             <MenuItem value="indonesia">Bahasa Indonesia</MenuItem>
@@ -119,7 +136,7 @@ const Material: React.FC = () => {
           <InputLabel>School Level</InputLabel>
           <Select
             value={schoolLevel}
-            onChange={handleChangeSchoolLevel}
+            onChange={handleChangeSchoolLevel} 
             label="Select School Level"
           >
             {Object.keys(data).map((level, index) => (
@@ -137,7 +154,7 @@ const Material: React.FC = () => {
             <InputLabel>Topic</InputLabel>
             <Select
               value={topic}
-              onChange={handleChangeTopic}
+              onChange={handleChangeTopic} 
               label="Select Topic"
             >
               {availableTopics.map((topic, index) => (
@@ -156,7 +173,7 @@ const Material: React.FC = () => {
             <InputLabel>Sub Topic</InputLabel>
             <Select
               value={subTopic}
-              onChange={handleChangeSubTopic}
+              onChange={handleChangeSubTopic} 
               label="Select Sub Topic"
             >
               {availableSubTopics.map((subTopic: string, index: number) => (
@@ -174,9 +191,7 @@ const Material: React.FC = () => {
           <InputLabel>Difficulty Level</InputLabel>
           <Select
             value={difficultyLevel}
-            onChange={(event) =>
-              dispatch(setDifficultyLevel(event.target.value))
-            }
+            onChange={handleSetDifficultyLevel}
             label="Select Difficulty Level"
           >
             {difficultyLevels.map((level) => (

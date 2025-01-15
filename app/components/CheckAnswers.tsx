@@ -26,15 +26,18 @@ import {
   setUserAnswers,
 } from "../lib/redux/slices/questionSlice";
 import axios from "axios";
+import { RootState } from "../types/state";
 
 const CheckAnswers: React.FC = () => {
-  const { loading } = useSelector((state: any) => state.global);
-  const { feedback, isResetted } = useSelector((state: any) => state.answer);
-  useSelector((state: any) => state.material);
-  const { questions, userAnswers, isAnswered} = useSelector(
-    (state: any) => state.question
+  const { loading } = useSelector((state: RootState) => state.global);
+  const { feedback, isResetted } = useSelector(
+    (state: RootState) => state.answer
   );
-  const { language } = useSelector((state: any) => state.material);
+  useSelector((state: RootState) => state.material);
+  const { questions, userAnswers, isAnswered } = useSelector(
+    (state: RootState) => state.question
+  );
+  const { language } = useSelector((state: RootState) => state.material);
 
   const dispatch = useDispatch();
 
@@ -47,7 +50,8 @@ const CheckAnswers: React.FC = () => {
         language,
       } as CheckAnswersPayload);
       dispatch(setFeedback(data.data));
-    } catch (error: any) {
+      dispatch(setIsResetted(true));
+    } catch {
       console.log("Failed to check answers");
     } finally {
       dispatch(setLoading(false));
@@ -73,7 +77,7 @@ const CheckAnswers: React.FC = () => {
   return (
     <>
       <Box textAlign="center" marginTop={3}>
-        {isResetted && (
+        {isResetted ? (
           <Button
             variant="contained"
             color="primary"
@@ -82,15 +86,16 @@ const CheckAnswers: React.FC = () => {
           >
             {loading ? <CircularProgress size={24} /> : "Reset"}
           </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleCheckAnswers}
+            disabled={loading || !isAnswered}
+          >
+            {loading ? <CircularProgress size={24} /> : "Submit Answers"}
+          </Button>
         )}
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleCheckAnswers}
-          disabled={loading || !isAnswered}
-        >
-          {loading ? <CircularProgress size={24} /> : "Submit Answers"}
-        </Button>
       </Box>
 
       {feedback && (

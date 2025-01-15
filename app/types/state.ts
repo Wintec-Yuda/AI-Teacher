@@ -23,3 +23,10 @@ export interface globalState {
   loading: boolean;
   activeTab: number
 }
+
+export interface RootState {
+  material: MaterialState;
+  question: QuestionState;
+  answer: AnswerState;
+  global: globalState;
+}

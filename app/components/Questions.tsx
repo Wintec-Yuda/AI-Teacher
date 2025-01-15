@@ -18,14 +18,15 @@ import {
 } from "../lib/redux/slices/questionSlice";
 import { GenerateQuestionsPayload } from "../types/payload";
 import axios from "axios";
+import { RootState } from "../types/state";
 
 const Questions: React.FC = () => {
   const [errors, setErrors] = useState<boolean[]>([]);
 
-  const {materials, topic, subTopic, schoolLevel, difficultyLevel, language} = useSelector((state: any) => state.material);
-  const { questions, numQuestions, userAnswers } =
-    useSelector((state: any) => state.question);
-  const { loading } = useSelector((state: any) => state.global);
+  const {materials, topic, subTopic, schoolLevel, difficultyLevel, language} = useSelector((state: RootState) => state.material);
+  const { questions, numQuestions, userAnswers, isAnswered } =
+    useSelector((state: RootState) => state.question);
+  const { loading } = useSelector((state: RootState) => state.global);
 
   const dispatch = useDispatch();
 
@@ -73,8 +74,8 @@ const Questions: React.FC = () => {
       setQuestions(questionsArray);
 
       dispatch(setQuestions(questionsArray));
-    } catch (error: any) {
-      console.log("Failed to generate questions", error);
+    } catch {
+      console.log("Failed to generate questions");
     } finally {
       dispatch(setLoading(false));
     }
@@ -147,6 +148,7 @@ const Questions: React.FC = () => {
               variant="contained"
               color="primary"
               onClick={handleSureAnswers}
+              disabled={loading || isAnswered}
             >
               Sure with the answers!
             </Button>

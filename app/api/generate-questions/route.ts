@@ -44,7 +44,7 @@ Please provide only the essay questions in a numbered list. Do not include answe
       message: "Questions generated successfully.",
       data,
     });
-  } catch (error: any) {
+  } catch {
     return NextResponse.json(
       {
         status: "error",

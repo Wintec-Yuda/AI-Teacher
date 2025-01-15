@@ -73,7 +73,7 @@ Please ensure all feedback is:
       message: "Answers checked successfully",
       data,
     });
-  } catch (error: any) {
+  } catch {
     return NextResponse.json(
       {
         status: "error",

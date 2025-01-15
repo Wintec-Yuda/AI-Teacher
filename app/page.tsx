@@ -6,9 +6,10 @@ import CheckAnswers from "./components/CheckAnswers";
 import Material from "./components/Material";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveTab } from "./lib/redux/slices/globalSlice";
+import { RootState } from "./types/state";
 
 export default function Home() {
-  const { activeTab } = useSelector((state: any) => state.global);
+  const { activeTab } = useSelector((state: RootState) => state.global);
 
   const dispatch = useDispatch();
 

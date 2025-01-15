@@ -38,7 +38,7 @@ Please write the material in "${language}", ensuring that it is clear, engaging,
       message: "Material generated successfully.",
       data,
     });
-  } catch (error: any) {
+  } catch {
     return NextResponse.json(
       {
         status: "error",
