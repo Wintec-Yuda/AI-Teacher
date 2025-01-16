@@ -3,7 +3,6 @@ export interface MaterialState {
   topic: string;
   subTopic: string;
   schoolLevel: string;
-  difficultyLevel: number;
   language: string;
 }
 

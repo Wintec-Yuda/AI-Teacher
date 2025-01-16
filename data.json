@@ -1,73 +1,572 @@
 {
   "TK": {
     "Basic Math Operations": {
-      "subtopics": ["Addition", "Subtraction", "Multiplication"]
+      "subtopics": [
+        "Addition",
+        "Subtraction",
+        "Grouping Objects",
+        "Shapes Recognition",
+        "Number Recognition",
+        "Counting from 1 to 20",
+        "Matching Numbers with Quantities",
+        "Sorting Objects by Size",
+        "Comparing Numbers (Bigger, Smaller, Equal)",
+        "Patterns and Sequences"
+      ]
     },
-    "English": {
-      "subtopics": ["Alphabet", "Vocabulary", "Simple Sentences"]
+    "Language": {
+      "subtopics": [
+        "Alphabet",
+        "Simple Words",
+        "Simple Sentences",
+        "Object Naming",
+        "Colors",
+        "Reading Picture Books",
+        "Rhyming Words",
+        "Listening to Stories",
+        "Opposite Words (Big-Small, Hot-Cold)",
+        "Animal Sounds"
+      ]
     },
-    "Art": {
-      "subtopics": ["Painting", "Drawing"]
+    "Art and Creativity": {
+      "subtopics": [
+        "Coloring",
+        "Finger Painting",
+        "Craft Making",
+        "Cutting and Pasting",
+        "Drawing Simple Shapes",
+        "Clay Modeling",
+        "Collage Making",
+        "Creating Simple Masks",
+        "Decorating with Glitter",
+        "Tracing Lines and Patterns"
+      ]
     },
-    "Music": {
-      "subtopics": ["Instruments", "Songs"]
+    "Music and Songs": {
+      "subtopics": [
+        "Children's Songs",
+        "Basic Musical Instruments",
+        "Dancing to Rhythms",
+        "Sound Recognition",
+        "Singing in Groups",
+        "Clapping to a Beat",
+        "Learning Action Songs",
+        "Humming Melodies",
+        "Exploring Sounds (High, Low, Loud, Soft)",
+        "Music Games"
+      ]
+    },
+    "Character and Moral Education": {
+      "subtopics": [
+        "Sharing with Friends",
+        "Respecting Others",
+        "Polite Words (Thank You, Sorry, Please)",
+        "Helping Others",
+        "Taking Turns",
+        "Being Honest",
+        "Following Rules",
+        "Understanding Emotions",
+        "Kindness Activities",
+        "Learning to Apologize"
+      ]
+    },
+    "Physical and Motor Skills": {
+      "subtopics": [
+        "Running and Jumping",
+        "Building Blocks",
+        "Simple Puzzles",
+        "Catching Small Balls",
+        "Balancing on One Foot",
+        "Threading Beads",
+        "Drawing with Crayons",
+        "Climbing and Sliding",
+        "Kicking a Ball",
+        "Hopping and Skipping"
+      ]
+    },
+    "Science": {
+      "subtopics": [
+        "Animals and Plants",
+        "Day and Night Cycle",
+        "Weather (Sunny, Rainy)",
+        "Basic Elements (Water, Soil, Air)",
+        "Exploring Nature",
+        "Observing Insects",
+        "Planting Seeds",
+        "Learning about Seasons",
+        "Experimenting with Water",
+        "Exploring Magnets"
+      ]
+    },
+    "Daily Life Skills": {
+      "subtopics": [
+        "Hand Washing",
+        "Professions (Doctor, Police, Teacher)",
+        "Dressing Up Independently",
+        "Transportation",
+        "Using a Spoon and Fork",
+        "Packing a Bag",
+        "Tying Shoelaces",
+        "Tidying Up",
+        "Learning About Time (Morning, Afternoon, Night)",
+        "Identifying Personal Belongings"
+      ]
+    },
+    "Social Skills": {
+      "subtopics": [
+        "Playing Together",
+        "Listening",
+        "Expressing Simple Opinions",
+        "Making Friends",
+        "Greeting Others",
+        "Waiting Patiently",
+        "Understanding Personal Space",
+        "Taking Responsibility",
+        "Asking for Help",
+        "Working in Groups"
+      ]
+    },
+    "Environment and Cleanliness": {
+      "subtopics": [
+        "Throwing Trash in the Bin",
+        "Watering Plants",
+        "Cleaning Up Toys",
+        "Recycling",
+        "Caring for Pets",
+        "Saving Water",
+        "Turning Off Lights",
+        "Keeping the Classroom Clean",
+        "Sorting Waste",
+        "Planting Trees"
+      ]
     }
   },
   "SD": {
     "Basic Math Operations": {
-      "subtopics": ["Addition", "Subtraction", "Multiplication", "Division"]
+      "subtopics": [
+        "Addition",
+        "Subtraction",
+        "Multiplication",
+        "Division",
+        "Fractions",
+        "Decimals",
+        "Geometry (Shapes and Angles)",
+        "Measurements (Length, Weight, Volume)",
+        "Telling Time",
+        "Word Problems",
+        "Data Interpretation (Charts and Graphs)",
+        "Introduction to Algebra"
+      ]
     },
     "English": {
-      "subtopics": ["Vocabulary", "Grammar", "Reading Comprehension"]
+      "subtopics": [
+        "Vocabulary",
+        "Grammar",
+        "Reading Comprehension",
+        "Creative Writing",
+        "Storytelling",
+        "Public Speaking",
+        "Listening Skills",
+        "Poetry",
+        "Spelling",
+        "Idioms and Phrases",
+        "Basic Essay Writing"
+      ]
     },
     "Science": {
-      "subtopics": ["Plants", "Animals", "Earth Science"]
+      "subtopics": [
+        "Plants and Photosynthesis",
+        "Animals and Their Habitats",
+        "Earth Science (Rocks, Soil, and Weather)",
+        "The Solar System",
+        "Human Body Systems",
+        "Forces and Motion",
+        "Energy (Light, Heat, and Sound)",
+        "Simple Machines",
+        "Environmental Conservation",
+        "Introduction to Electricity",
+        "Basic Experiments and Observations"
+      ]
     },
     "History": {
-      "subtopics": ["Ancient Civilizations", "World Wars"]
+      "subtopics": [
+        "Ancient Civilizations (Egypt, Mesopotamia, Indus Valley)",
+        "Indonesian History (Proclamation and Struggle for Independence)",
+        "World Wars (Causes and Impacts)",
+        "Explorers and Discoveries",
+        "Famous Leaders",
+        "Revolutions (Industrial, Digital)",
+        "Cultural Heritage",
+        "Modern History (Globalization and Technology)"
+      ]
     },
     "Geography": {
-      "subtopics": ["Continents", "Countries", "Rivers"]
+      "subtopics": [
+        "Continents and Oceans",
+        "Countries and Capitals",
+        "Mountains and Rivers",
+        "Climate and Weather",
+        "Natural Resources",
+        "Mapping Skills (Using Atlas and Maps)",
+        "Environmental Changes (Deforestation, Pollution)",
+        "Disaster Preparedness (Floods, Earthquakes)",
+        "Sustainable Development Goals",
+        "Cultural Diversity Around the World"
+      ]
+    },
+    "Technology": {
+      "subtopics": [
+        "Introduction to Computers",
+        "Safe Internet Practices",
+        "Basic Coding (Scratch, Blockly)",
+        "Robotics",
+        "Typing Skills",
+        "Digital Storytelling",
+        "3D Printing Basics",
+        "Artificial Intelligence (Basics for Kids)",
+        "Online Collaboration Tools",
+        "Ethical Use of Technology"
+      ]
+    },
+    "Arts and Crafts": {
+      "subtopics": [
+        "Drawing and Sketching",
+        "Painting Techniques",
+        "Handicrafts (Origami, Paper Mache)",
+        "Clay Modeling",
+        "Creating Collages",
+        "Exploring Colors and Textures",
+        "Digital Art Basics",
+        "Photography for Beginners",
+        "Music Composition",
+        "Dance and Choreography"
+      ]
+    },
+    "Physical Education": {
+      "subtopics": [
+        "Team Sports (Soccer, Basketball, Volleyball)",
+        "Athletics (Running, Jumping, Throwing)",
+        "Yoga and Relaxation Techniques",
+        "Martial Arts Basics",
+        "Fitness and Health Education",
+        "Coordination Activities",
+        "Swimming",
+        "Outdoor Adventures (Hiking, Camping Basics)",
+        "First Aid Training",
+        "Healthy Eating and Lifestyle"
+      ]
+    },
+    "Character Education": {
+      "subtopics": [
+        "Teamwork and Collaboration",
+        "Leadership Skills",
+        "Problem-Solving",
+        "Empathy and Respect",
+        "Time Management",
+        "Conflict Resolution",
+        "Building Self-Confidence",
+        "Financial Literacy Basics",
+        "Civic Responsibility",
+        "Volunteering and Community Service"
+      ]
     }
   },
   "SMP": {
-    "Algebra": {
-      "subtopics": ["Linear Equations", "Polynomials"]
+    "Mathematics": {
+      "subtopics": [
+        "Algebra (Linear Equations, Quadratic Equations)",
+        "Geometry (Angles, Triangles, Circles)",
+        "Statistics and Probability",
+        "Ratios and Proportions",
+        "Functions",
+        "Graphing and Coordinate Geometry",
+        "Trigonometry Basics",
+        "Measurement (Perimeter, Area, Volume)",
+        "Set Theory",
+        "Introduction to Calculus"
+      ]
     },
-    "Geometry": {
-      "subtopics": ["Angles", "Shapes"]
+    "English": {
+      "subtopics": [
+        "Advanced Vocabulary",
+        "Grammar and Sentence Structure",
+        "Reading Comprehension",
+        "Essay Writing",
+        "Formal and Informal Communication",
+        "Debate and Argumentation",
+        "Short Story Analysis",
+        "Drama and Plays",
+        "Listening and Speaking Skills",
+        "Summarizing and Paraphrasing"
+      ]
     },
-    "Biology": {
-      "subtopics": ["Plants", "Animals"]
+    "Science": {
+      "subtopics": [
+        "Physics (Forces, Energy, Motion, Electricity)",
+        "Chemistry (Atoms, Elements, Compounds, Reactions)",
+        "Biology (Cells, Human Body Systems, Ecosystems)",
+        "Earth and Space Science (Weather, Climate, Astronomy)",
+        "Environmental Science (Pollution, Conservation)",
+        "Scientific Inquiry and Experiments",
+        "Introduction to Genetics",
+        "Renewable and Non-Renewable Energy",
+        "Global Warming and Climate Change",
+        "Technology in Science"
+      ]
     },
-    "Physics": {
-      "subtopics": ["Motion", "Forces"]
+    "Social Studies": {
+      "subtopics": [
+        "Indonesian History",
+        "World History (Industrial Revolution, World Wars)",
+        "Geography (Maps, Regions, Population Studies)",
+        "Civics (Democracy, Human Rights, Constitution)",
+        "Cultural Studies",
+        "Globalization and Its Impact",
+        "Economic Systems and Trade",
+        "Religious and Ethical Values",
+        "Modern Political Systems",
+        "Contemporary Issues (Refugees, Pandemics)"
+      ]
     },
-    "History": {
-      "subtopics": ["Modern History", "Ancient Civilizations"]
+    "Technology and ICT": {
+      "subtopics": [
+        "Basic Programming (HTML, CSS, Javascript)",
+        "Introduction to Artificial Intelligence",
+        "Cybersecurity and Safe Internet Practices",
+        "Data Analysis Basics",
+        "Digital Storytelling",
+        "Video Editing and Content Creation",
+        "Introduction to Robotics",
+        "Web Design Basics",
+        "Computer Hardware and Software",
+        "Technology Ethics"
+      ]
+    },
+    "Arts and Music": {
+      "subtopics": [
+        "Drawing and Advanced Sketching",
+        "Painting Techniques (Watercolor, Acrylic)",
+        "Sculpture and 3D Art",
+        "Digital Art and Graphic Design",
+        "Music Theory and Composition",
+        "Learning Instruments (Guitar, Piano, Drums)",
+        "Choir and Vocal Training",
+        "Modern Dance and Choreography",
+        "Film and Photography",
+        "Exploring Cultural Arts"
+      ]
+    },
+    "Physical Education": {
+      "subtopics": [
+        "Team Sports (Basketball, Soccer, Volleyball)",
+        "Athletics (Track and Field)",
+        "Physical Fitness (Aerobics, Cardio, Strength Training)",
+        "Martial Arts and Self-Defense",
+        "Yoga and Mindfulness",
+        "Outdoor Activities (Hiking, Camping, Orienteering)",
+        "Swimming and Lifesaving Skills",
+        "Nutrition and Health Education",
+        "Injury Prevention and First Aid",
+        "Sportsmanship and Teamwork"
+      ]
+    },
+    "Character and Life Skills": {
+      "subtopics": [
+        "Leadership Development",
+        "Emotional Intelligence",
+        "Critical Thinking and Problem Solving",
+        "Time Management and Productivity",
+        "Financial Literacy (Budgeting, Saving)",
+        "Civic Engagement and Volunteering",
+        "Conflict Resolution and Mediation",
+        "Career Exploration and Goal Setting",
+        "Social Media Literacy",
+        "Building Resilience and Coping Skills"
+      ]
+    },
+    "Foreign Languages": {
+      "subtopics": [
+        "Introduction to French",
+        "Introduction to Mandarin",
+        "Introduction to Japanese",
+        "Conversational Skills",
+        "Grammar and Writing",
+        "Cultural Exploration Through Language",
+        "Listening Comprehension",
+        "Reading and Translation",
+        "Pronunciation Practice",
+        "Language Games and Activities"
+      ]
+    },
+    "Environmental Studies": {
+      "subtopics": [
+        "Ecosystems and Biodiversity",
+        "Sustainable Development",
+        "Waste Management and Recycling",
+        "Renewable Energy Sources",
+        "Climate Action",
+        "Conservation Efforts",
+        "Environmental Laws and Policies",
+        "Water and Air Quality",
+        "Green Technologies",
+        "Community Environmental Projects"
+      ]
     }
   },
   "SMA": {
-    "Algebra": {
-      "subtopics": ["Linear Equations", "Quadratic Equations"]
-    },
-    "Geometry": {
-      "subtopics": ["Circles", "Triangles"]
+    "Mathematics": {
+      "subtopics": [
+        "Algebra (Quadratic Functions, Polynomials)",
+        "Trigonometry (Angles, Identities, Graphs)",
+        "Calculus (Limits, Derivatives, Integration)",
+        "Probability and Statistics",
+        "Matrices and Determinants",
+        "Vectors",
+        "Sequences and Series",
+        "Logarithms and Exponentials",
+        "Complex Numbers",
+        "Discrete Mathematics"
+      ]
     },
     "English": {
-      "subtopics": ["Literature", "Grammar"]
-    },
-    "Trigonometry": {
-      "subtopics": ["Sine", "Cosine", "Tangent"]
+      "subtopics": [
+        "Advanced Grammar",
+        "Essay Writing (Analytical, Argumentative, Descriptive)",
+        "Literary Analysis (Prose, Poetry, Drama)",
+        "Critical Reading and Interpretation",
+        "Public Speaking and Debate",
+        "Research and Report Writing",
+        "Business English (Emails, Resumes, Cover Letters)",
+        "Creative Writing (Short Stories, Poetry)",
+        "Advanced Listening and Speaking Skills",
+        "SAT/IELTS/TOEFL Preparation"
+      ]
     },
     "Physics": {
-      "subtopics": ["Mechanics", "Electricity"]
+      "subtopics": [
+        "Mechanics (Kinematics, Dynamics, Work, Energy)",
+        "Waves and Oscillations",
+        "Electricity and Magnetism",
+        "Thermodynamics",
+        "Optics (Reflection, Refraction, Lenses)",
+        "Modern Physics (Quantum Mechanics, Relativity)",
+        "Nuclear Physics",
+        "Fluid Mechanics",
+        "Electronics and Circuit Design",
+        "Physics in Everyday Life"
+      ]
     },
     "Chemistry": {
-      "subtopics": ["Atoms", "Molecules"]
+      "subtopics": [
+        "Organic Chemistry (Hydrocarbons, Functional Groups, Reactions)",
+        "Inorganic Chemistry (Periodic Table, Bonding, Coordination Compounds)",
+        "Physical Chemistry (Thermodynamics, Kinetics, Equilibrium)",
+        "Analytical Chemistry (Titration, Spectroscopy)",
+        "Electrochemistry",
+        "Acids and Bases",
+        "Chemical Bonding and Structure",
+        "Stoichiometry",
+        "Environmental Chemistry",
+        "Industrial Applications of Chemistry"
+      ]
     },
     "Biology": {
-      "subtopics": ["Genetics", "Cells"]
+      "subtopics": [
+        "Cell Biology",
+        "Genetics and Heredity",
+        "Human Anatomy and Physiology",
+        "Plant Physiology",
+        "Evolution and Adaptation",
+        "Ecology and Ecosystems",
+        "Microbiology (Bacteria, Viruses, Fungi)",
+        "Biotechnology",
+        "Molecular Biology (DNA, RNA, Protein Synthesis)",
+        "Health and Disease"
+      ]
+    },
+    "Social Studies": {
+      "subtopics": [
+        "World History (Colonialism, Modern History)",
+        "Indonesian History (Post-Independence Era)",
+        "Economics (Supply and Demand, Markets, Trade)",
+        "Sociology (Social Structures, Globalization)",
+        "Political Science (Democracy, Government Systems)",
+        "Cultural Studies",
+        "Contemporary Global Issues (Climate Change, Migration)",
+        "Philosophy and Ethics",
+        "International Relations",
+        "Community Development Projects"
+      ]
+    },
+    "Technology and Computer Science": {
+      "subtopics": [
+        "Advanced Programming (Python, Java, C++)",
+        "Web Development (HTML, CSS, JavaScript, Frameworks)",
+        "Mobile App Development",
+        "Artificial Intelligence and Machine Learning",
+        "Cybersecurity and Ethical Hacking",
+        "Cloud Computing Basics",
+        "Data Structures and Algorithms",
+        "Database Management Systems",
+        "3D Modeling and Animation",
+        "Tech for Social Good"
+      ]
+    },
+    "Arts and Music": {
+      "subtopics": [
+        "Advanced Drawing and Painting",
+        "Digital Art and Graphic Design",
+        "Music Composition and Theory",
+        "Learning Advanced Instruments (Guitar, Piano, Violin)",
+        "Photography and Videography",
+        "Theatre and Drama",
+        "Contemporary Dance",
+        "Cultural and Traditional Arts",
+        "Film Making and Editing",
+        "Art History and Appreciation"
+      ]
+    },
+    "Physical Education and Health": {
+      "subtopics": [
+        "Competitive Sports (Basketball, Soccer, Volleyball)",
+        "Fitness and Conditioning",
+        "Yoga and Mindfulness Practices",
+        "Nutrition and Healthy Living",
+        "Self-Defense and Martial Arts",
+        "Team Building Activities",
+        "Sports Psychology",
+        "Outdoor Leadership Skills (Hiking, Orienteering)",
+        "First Aid and Emergency Response",
+        "Stress Management Techniques"
+      ]
+    },
+    "Career and Life Skills": {
+      "subtopics": [
+        "Career Exploration and Planning",
+        "Entrepreneurship Basics",
+        "Financial Literacy (Investing, Budgeting, Taxes)",
+        "Time Management and Productivity",
+        "Critical Thinking and Problem Solving",
+        "Leadership and Teamwork",
+        "Public Speaking and Presentation Skills",
+        "Personal Branding and Networking",
+        "Preparing for College Applications",
+        "Mental Health Awareness"
+      ]
+    },
+    "Environmental Studies": {
+      "subtopics": [
+        "Sustainability and Conservation",
+        "Climate Science",
+        "Biodiversity and Ecosystems",
+        "Renewable Energy",
+        "Environmental Policies and Laws",
+        "Pollution and Waste Management",
+        "Urban Planning and Development",
+        "Green Technologies",
+        "Environmental Activism",
+        "Sustainable Development Goals"
+      ]
     }
   }
 }

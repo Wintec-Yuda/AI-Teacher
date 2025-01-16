@@ -6,7 +6,6 @@ const initialState: MaterialState = {
   topic: "",
   subTopic: "",
   schoolLevel: "",
-  difficultyLevel: 1,
   language: "indonesia",
 };
 
@@ -29,9 +28,6 @@ const materialSlice = createSlice({
     setSchoolLevel: (state, action: PayloadAction<string>) => {
       state.schoolLevel = action.payload;
     },
-    setDifficultyLevel: (state, action: PayloadAction<number>) => {
-      state.difficultyLevel = action.payload;
-    },
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
     },
@@ -44,7 +40,6 @@ export const {
   setTopic,
   setSubTopic,
   setSchoolLevel,
-  setDifficultyLevel,
   setLanguage,
 } = materialSlice.actions;
 

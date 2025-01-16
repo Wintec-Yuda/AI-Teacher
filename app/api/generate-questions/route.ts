@@ -9,7 +9,7 @@ if (!apiKey) {
 
 export async function POST(req: Request) {
   try {
-    const { numQuestions, topic, subTopic, schoolLevel, difficultyLevel, language } = await req.json();
+    const { numQuestions, topic, subTopic, schoolLevel, language } = await req.json();
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const prompt = `
 Please create ${numQuestions} essay-style questions on the topic of "${topic}" with a focus on the subtopic "${subTopic}". The questions should be designed to stimulate critical thinking and require students to engage deeply with the material. Ensure that the questions meet the following criteria:
 1. Grade Level: Tailor the questions to the appropriate cognitive level for "${schoolLevel}" students, considering their developmental stage and reasoning abilities.
-2. Difficulty: Set the questions at a "${difficultyLevel}" level, challenging students to think critically and apply their knowledge, without making them excessively difficult or overwhelming.
+2. Difficulty: Challenging students to think critically and apply their knowledge, without making them excessively difficult or overwhelming.
 3. Language: All questions should be in "${language}" and appropriate for the language proficiency of the students. Ensure clarity and precision in the phrasing.
 4. Critical Thinking: The questions should encourage students to:
    - Analyze concepts in depth, breaking down ideas into their components.

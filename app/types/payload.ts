@@ -2,7 +2,6 @@ export interface GenerateMaterialPayload {
   topic: string;
   subTopic: string;
   schoolLevel: string;
-  difficultyLevel: number;
   language: string;
 }
 
@@ -17,6 +16,5 @@ export interface GenerateQuestionsPayload {
   topic: string;
   subTopic: string;
   schoolLevel: string;
-  difficultyLevel: number;
   language: string;
 }

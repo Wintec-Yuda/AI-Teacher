@@ -12,7 +12,6 @@ import { setActiveTab, setLoading } from "../lib/redux/slices/globalSlice";
 import { setFeedback, setIsResetted } from "../lib/redux/slices/answerSlice";
 import { CheckAnswersPayload } from "../types/payload";
 import {
-  setDifficultyLevel,
   setLanguage,
   setMaterials,
   setSchoolLevel,
@@ -62,7 +61,6 @@ const CheckAnswers: React.FC = () => {
     dispatch(setTopic(""));
     dispatch(setSubTopic(""));
     dispatch(setSchoolLevel(""));
-    dispatch(setDifficultyLevel(1));
     dispatch(setLanguage("indonesia"));
     dispatch(setNumQuestions(5));
     dispatch(setFeedback(""));
@@ -76,13 +74,14 @@ const CheckAnswers: React.FC = () => {
 
   return (
     <>
-      <Box textAlign="center" marginTop={3}>
+      <Box className="text-center mt-8">
         {isResetted ? (
           <Button
             variant="contained"
             color="primary"
             onClick={handleResetted}
             disabled={loading}
+            className="font-semibold w-full py-2 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
           >
             {loading ? <CircularProgress size={24} /> : "Reset"}
           </Button>
@@ -92,6 +91,7 @@ const CheckAnswers: React.FC = () => {
             color="secondary"
             onClick={handleCheckAnswers}
             disabled={loading || !isAnswered}
+            className="font-semibold w-full py-2 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
           >
             {loading ? <CircularProgress size={24} /> : "Submit Answers"}
           </Button>
@@ -99,8 +99,12 @@ const CheckAnswers: React.FC = () => {
       </Box>
 
       {feedback && (
-        <Paper elevation={3} style={{ padding: "20px", marginTop: "20px" }}>
-          <Typography variant="h5" gutterBottom>
+        <Paper elevation={3} className="p-6 mt-6 bg-white rounded-lg shadow-lg">
+          <Typography
+            variant="h5"
+            gutterBottom
+            className="text-gray-800 font-semibold"
+          >
             Feedback:
           </Typography>
           <Typography style={{ whiteSpace: "pre-wrap" }}>

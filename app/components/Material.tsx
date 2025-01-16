@@ -20,7 +20,6 @@ import {
   setSchoolLevel,
   setTopic,
   setSubTopic,
-  setDifficultyLevel,
   addMaterial,
 } from "../lib/redux/slices/materialSlice";
 import { GenerateMaterialPayload } from "../types/payload";
@@ -28,13 +27,12 @@ import { setLoading } from "../lib/redux/slices/globalSlice";
 import axios from "axios";
 import { RootState } from "../types/state";
 
-const difficultyLevels = Array.from({ length: 10 }, (_, index) => index + 1);
-
 const Material: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { materials, topic, subTopic, schoolLevel, difficultyLevel, language } =
-    useSelector((state: RootState) => state.material);
+  const { materials, topic, subTopic, schoolLevel, language } = useSelector(
+    (state: RootState) => state.material
+  );
   const { loading } = useSelector((state: RootState) => state.global);
 
   const dispatch = useDispatch();
@@ -43,9 +41,7 @@ const Material: React.FC = () => {
     dispatch(setLanguage(event.target.value as string));
   };
 
-  const handleChangeSchoolLevel = (
-    event: SelectChangeEvent<string>
-  ) => {
+  const handleChangeSchoolLevel = (event: SelectChangeEvent<string>) => {
     const newSchoolLevel = event.target.value as string;
     dispatch(setSchoolLevel(newSchoolLevel));
     dispatch(setTopic(""));
@@ -62,11 +58,6 @@ const Material: React.FC = () => {
     dispatch(setSubTopic(event.target.value as string));
   };
 
-  const handleSetDifficultyLevel = (event: SelectChangeEvent<number>) => {
-    const newDifficultyLevel = Number(event.target.value as number);
-    dispatch(setDifficultyLevel(newDifficultyLevel));
-  };
-
   const handleGenerateMaterials = async () => {
     dispatch(setLoading(true));
     try {
@@ -74,7 +65,6 @@ const Material: React.FC = () => {
         topic,
         subTopic,
         schoolLevel,
-        difficultyLevel,
         language,
       } as GenerateMaterialPayload);
 
@@ -103,11 +93,11 @@ const Material: React.FC = () => {
     ? (Object.keys(dataMaterial[schoolLevel as keyof typeof data]) as string[])
     : [];
 
-    const availableSubTopics =
+  const availableSubTopics =
     schoolLevel && topic
       ? dataMaterial[schoolLevel as keyof typeof data][topic].subtopics
       : [];
-  
+
   const itemsPerPage = 1;
   const totalPages = Math.ceil(materials.length / itemsPerPage);
   const currentMaterials = materials.slice(
@@ -122,7 +112,7 @@ const Material: React.FC = () => {
           <InputLabel>Language</InputLabel>
           <Select
             value={language}
-            onChange={handleChangeLanguage} 
+            onChange={handleChangeLanguage}
             label="Select Language"
           >
             <MenuItem value="indonesia">Bahasa Indonesia</MenuItem>
@@ -136,7 +126,7 @@ const Material: React.FC = () => {
           <InputLabel>School Level</InputLabel>
           <Select
             value={schoolLevel}
-            onChange={handleChangeSchoolLevel} 
+            onChange={handleChangeSchoolLevel}
             label="Select School Level"
           >
             {Object.keys(data).map((level, index) => (
@@ -154,7 +144,7 @@ const Material: React.FC = () => {
             <InputLabel>Topic</InputLabel>
             <Select
               value={topic}
-              onChange={handleChangeTopic} 
+              onChange={handleChangeTopic}
               label="Select Topic"
             >
               {availableTopics.map((topic, index) => (
@@ -173,7 +163,7 @@ const Material: React.FC = () => {
             <InputLabel>Sub Topic</InputLabel>
             <Select
               value={subTopic}
-              onChange={handleChangeSubTopic} 
+              onChange={handleChangeSubTopic}
               label="Select Sub Topic"
             >
               {availableSubTopics.map((subTopic: string, index: number) => (
@@ -186,23 +176,6 @@ const Material: React.FC = () => {
         </Box>
       )}
 
-      <Box marginBottom={3}>
-        <FormControl fullWidth disabled={materials.length > 0 || loading}>
-          <InputLabel>Difficulty Level</InputLabel>
-          <Select
-            value={difficultyLevel}
-            onChange={handleSetDifficultyLevel}
-            label="Select Difficulty Level"
-          >
-            {difficultyLevels.map((level) => (
-              <MenuItem key={level} value={level}>
-                {level}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-
       {materials.length === 0 && (
         <Box textAlign="center" marginBottom={3}>
           <Button
@@ -210,6 +183,7 @@ const Material: React.FC = () => {
             color="primary"
             onClick={handleGenerateMaterials}
             disabled={loading || !topic || !subTopic}
+            className="font-semibold bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
           >
             {loading ? <CircularProgress size={24} /> : "Generate Material"}
           </Button>
@@ -243,6 +217,7 @@ const Material: React.FC = () => {
                 color="primary"
                 onClick={handleGenerateMaterials}
                 disabled={loading || !topic || !subTopic}
+                className="font-semibold bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
               >
                 {loading ? <CircularProgress size={24} /> : "Continue Learning"}
               </Button>
