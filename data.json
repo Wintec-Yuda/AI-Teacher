@@ -568,5 +568,22 @@
         "Sustainable Development Goals"
       ]
     }
+  },
+  "Enigma": {
+    "EnglishForPresentation": {
+      "subtopics": [
+        "Vocabulary",
+        "Grammar",
+        "Reading Comprehension",
+        "Creative Writing",
+        "Storytelling",
+        "Public Speaking",
+        "Listening Skills",
+        "Poetry",
+        "Spelling",
+        "Idioms and Phrases",
+        "Basic Essay Writing"
+      ]
+    }
   }
 }
