@@ -61,11 +61,14 @@ const Material: React.FC = () => {
   const handleGenerateMaterials = async () => {
     dispatch(setLoading(true));
     try {
+      const latestMaterial = materials[materials.length - 1];
+
       const { data } = await axios.post("/api/generate-material", {
         topic,
         subTopic,
         schoolLevel,
         language,
+        latestMaterial,
       } as GenerateMaterialPayload);
 
       dispatch(addMaterial(data.data));
@@ -109,28 +112,34 @@ const Material: React.FC = () => {
     <>
       <Box marginBottom={3}>
         <FormControl fullWidth disabled={materials.length > 0 || loading}>
-          <InputLabel>Language</InputLabel>
+          <InputLabel className="text-[#444444]">Language</InputLabel>
           <Select
             value={language}
             onChange={handleChangeLanguage}
             label="Select Language"
+            className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
           >
-            <MenuItem value="indonesia">Bahasa Indonesia</MenuItem>
-            <MenuItem value="english">English</MenuItem>
+            <MenuItem value="indonesia" className="text-[#444444]">
+              Bahasa Indonesia
+            </MenuItem>
+            <MenuItem value="english" className="text-[#444444]">
+              English
+            </MenuItem>
           </Select>
         </FormControl>
       </Box>
 
       <Box marginBottom={3}>
         <FormControl fullWidth disabled={materials.length > 0 || loading}>
-          <InputLabel>School Level</InputLabel>
+          <InputLabel className="text-[#444444]">School Level</InputLabel>
           <Select
             value={schoolLevel}
             onChange={handleChangeSchoolLevel}
             label="Select School Level"
+            className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
           >
             {Object.keys(data).map((level, index) => (
-              <MenuItem key={index} value={level}>
+              <MenuItem key={index} value={level} className="text-[#444444]">
                 {level}
               </MenuItem>
             ))}
@@ -141,14 +150,15 @@ const Material: React.FC = () => {
       {schoolLevel && (
         <Box marginBottom={3}>
           <FormControl fullWidth disabled={materials.length > 0 || loading}>
-            <InputLabel>Topic</InputLabel>
+            <InputLabel className="text-[#444444]">Topic</InputLabel>
             <Select
               value={topic}
               onChange={handleChangeTopic}
               label="Select Topic"
+              className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
             >
               {availableTopics.map((topic, index) => (
-                <MenuItem key={index} value={topic}>
+                <MenuItem key={index} value={topic} className="text-[#444444]">
                   {topic}
                 </MenuItem>
               ))}
@@ -159,15 +169,21 @@ const Material: React.FC = () => {
 
       {schoolLevel && topic && (
         <Box marginBottom={3}>
-          <FormControl fullWidth disabled={materials.length > 0 || loading}>
-            <InputLabel>Sub Topic</InputLabel>
+          <FormControl fullWidth>
+            <InputLabel className="text-[#444444]">Sub Topic</InputLabel>
             <Select
               value={subTopic}
               onChange={handleChangeSubTopic}
               label="Select Sub Topic"
+              disabled={materials.length > 0 || loading}
+              className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
             >
               {availableSubTopics.map((subTopic: string, index: number) => (
-                <MenuItem key={index} value={subTopic}>
+                <MenuItem
+                  key={index}
+                  value={subTopic}
+                  className="text-[#444444]"
+                >
                   {subTopic}
                 </MenuItem>
               ))}
@@ -183,7 +199,7 @@ const Material: React.FC = () => {
             color="primary"
             onClick={handleGenerateMaterials}
             disabled={loading || !topic || !subTopic}
-            className="font-semibold bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
+            className="font-semibold bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20 text-[#444444]"
           >
             {loading ? <CircularProgress size={24} /> : "Generate Material"}
           </Button>
@@ -201,14 +217,27 @@ const Material: React.FC = () => {
             />
           </Box>
 
-          <Paper elevation={3} style={{ padding: "20px", marginTop: "20px" }}>
-            <Typography variant="h5" gutterBottom>
+          <Paper
+            elevation={3}
+            style={{
+              padding: "20px",
+              marginTop: "20px",
+              backgroundColor: "#F4E5C2",
+            }}
+          >
+            <Typography
+              variant="h5"
+              gutterBottom
+              className="font-bold text-[#444444]"
+            >
               Material
             </Typography>
             {materials.length > 0 ? (
               <MarkdownWithProperHtml content={currentMaterials[0]} />
             ) : (
-              <Typography>No material available for this page.</Typography>
+              <Typography variant="body1" className="text-[#444444]">
+                No material available for this page.
+              </Typography>
             )}
 
             <Box textAlign="center" marginBottom={3} marginTop={3}>
@@ -217,7 +246,7 @@ const Material: React.FC = () => {
                 color="primary"
                 onClick={handleGenerateMaterials}
                 disabled={loading || !topic || !subTopic}
-                className="font-semibold bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
+                className="font-semibold bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20 text-[#444444]"
               >
                 {loading ? <CircularProgress size={24} /> : "Continue Learning"}
               </Button>

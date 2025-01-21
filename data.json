@@ -570,7 +570,7 @@
     }
   },
   "Enigma": {
-    "EnglishForPresentation": {
+    "English For Presentation": {
       "subtopics": [
         "Vocabulary",
         "Grammar",
@@ -583,6 +583,105 @@
         "Spelling",
         "Idioms and Phrases",
         "Basic Essay Writing"
+      ]
+    },
+    "General English Skills": {
+      "subtopics": [
+        "Pronunciation and Phonetics",
+        "Common English Expressions",
+        "Sentence Structure",
+        "Tenses and Their Usage",
+        "Punctuation Rules",
+        "Word Formation and Derivatives",
+        "Commonly Confused Words",
+        "Synonyms and Antonyms",
+        "Active and Passive Voice",
+        "Direct and Indirect Speech",
+        "Prefixes and Suffixes"
+      ]
+    },
+    "English for Communication": {
+      "subtopics": [
+        "Conversational English",
+        "Asking and Answering Questions",
+        "Making Requests and Offers",
+        "Giving Directions",
+        "Describing People, Places, and Things",
+        "Agreeing and Disagreeing",
+        "Persuasion and Negotiation",
+        "Politeness and Formality",
+        "Apologizing and Expressing Regret",
+        "Telephone and Email Etiquette"
+      ]
+    },
+    "Business English": {
+      "subtopics": [
+        "Writing Emails and Reports",
+        "Business Meetings and Discussions",
+        "Networking and Small Talk",
+        "Job Interviews and Resumes",
+        "Customer Service Communication",
+        "Marketing and Advertising Language",
+        "Negotiation and Persuasion",
+        "Professional Etiquette",
+        "Presenting Data and Charts",
+        "Writing a Business Proposal"
+      ]
+    },
+    "English for Academic Purposes": {
+      "subtopics": [
+        "Academic Writing and Research",
+        "Critical Thinking and Analysis",
+        "Essay Structure and Development",
+        "Summarizing and Paraphrasing",
+        "Citing Sources and Avoiding Plagiarism",
+        "Academic Vocabulary",
+        "Understanding Scientific Texts",
+        "Note-Taking and Study Skills",
+        "Writing a Research Paper",
+        "Debating and Argumentation"
+      ]
+    },
+    "English for Travel": {
+      "subtopics": [
+        "Airport and Immigration English",
+        "Booking Hotels and Transportation",
+        "Ordering Food and Drinks",
+        "Shopping and Bargaining",
+        "Asking for Directions",
+        "Emergency Situations and Medical Help",
+        "Cultural Etiquette and Local Customs",
+        "Making Reservations",
+        "Small Talk with Locals",
+        "Travel Diary and Blogging"
+      ]
+    },
+    "English for Literature and Media": {
+      "subtopics": [
+        "Analyzing Short Stories",
+        "Understanding Novels",
+        "Exploring Poetry",
+        "Dramatic Monologues and Plays",
+        "Film and Television Analysis",
+        "Journalistic Writing",
+        "Song Lyrics and Meaning",
+        "Writing Book and Movie Reviews",
+        "Classic vs. Modern Literature",
+        "Character Development in Stories"
+      ]
+    },
+    "English for Exams and Tests": {
+      "subtopics": [
+        "TOEFL Preparation",
+        "IELTS Preparation",
+        "SAT and ACT English",
+        "GRE and GMAT Verbal Skills",
+        "Listening Comprehension Strategies",
+        "Reading Strategies for Exams",
+        "Writing Essays Under Time Limits",
+        "Common Mistakes in Exams",
+        "Grammar Drills for Tests",
+        "Vocabulary Building for Exams"
       ]
     }
   }

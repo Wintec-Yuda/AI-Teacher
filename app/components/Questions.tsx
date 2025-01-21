@@ -70,6 +70,7 @@ const Questions: React.FC = () => {
       const questionsArray = data.data
         .split("\n")
         .filter((q: string) => q.trim() !== "");
+        
       setQuestions(questionsArray);
 
       dispatch(setQuestions(questionsArray));
@@ -102,7 +103,7 @@ const Questions: React.FC = () => {
           onChange={handleSetNumQuestions}
           fullWidth
           inputProps={{ min: 2 }}
-          className="mb-4"
+          className="mb-4 text[#444444]"
         />
         <Box textAlign="center" marginBottom={3}>
           <Button
@@ -110,7 +111,7 @@ const Questions: React.FC = () => {
             color="secondary"
             onClick={handleGenerateQuestions}
             disabled={loading || materials.length === 0 || questions.length > 0}
-            className="font-semibold w-full py-2 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
+            className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-white rounded shadow-lg shadow-black/20"
           >
             {loading ? <CircularProgress size={24} /> : "Generate Questions"}
           </Button>
@@ -118,13 +119,13 @@ const Questions: React.FC = () => {
       </Box>
 
       {questions.length > 0 && (
-        <Paper elevation={3} className="p-6 bg-white rounded-lg shadow-lg mb-6">
-          <Typography variant="h5" gutterBottom className="text-gray-700 font-semibold">
+        <Paper elevation={6} className="p-6 rounded-lg shadow-lg mb-6 bg-[#F4E5C2]">
+          <Typography variant="h5" gutterBottom className="text-[#444444] font-semibold">
             Questions:
           </Typography>
           {questions.map((q: string, i: number) => (
             <Box key={i} marginBottom={2}>
-              <Typography variant="h6" className="text-gray-800 mb-2">
+              <Typography variant="h6" className="text-[#444444] font-bold">
                 Question {i + 1}:
               </Typography>
               <MarkdownWithProperHtml content={q} />
@@ -149,7 +150,7 @@ const Questions: React.FC = () => {
               color="primary"
               onClick={handleSureAnswers}
               disabled={loading || isAnswered}
-              className="font-semibold w-full py-2 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
+              className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-white rounded shadow-lg shadow-black/20"
             >
               Sure with the answers!
             </Button>

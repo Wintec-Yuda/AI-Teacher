@@ -17,20 +17,20 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="lg" className="bg-gradient-to-r from-green-200 to-blue-100 min-h-screen p-6 rounded-lg shadow-lg">
-      <Typography variant="h3" align="center" gutterBottom className="font-bold bg-gradient-to-r from-teal-200 to-green-300 hover:from-teal-300 hover:to-green-600 rounded shadow-lg shadow-green-500/50">
+    <Container maxWidth="lg" className="bg-[#F4E5C2] min-h-screen p-6 rounded-lg shadow-lg">
+      <Typography variant="h3" align="center" gutterBottom className="font-bold bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20 text-[#444444]">
         AI Teacher
       </Typography>
       <Tabs
         value={activeTab}
         onChange={handleChangeActiveTab}
         centered
-        TabIndicatorProps={{ style: { backgroundColor: "#00bcf0" } }}
-        className="mb-6"
+        TabIndicatorProps={{ style: { backgroundColor: "#111111" } }}
+        className="mb-6 "
       >
-        <Tab label="Material" className="font-semibold rounded hover:bg-cyan-300 focus:outline-none" />
-        <Tab label="Questions" className="font-semibold rounded hover:bg-cyan-300 focus:outline-none" />
-        <Tab label="Check Answers" className="font-semibold rounded hover:bg-cyan-300 focus:outline-none" />
+        <Tab label="Material" className="font-semibold rounded text-[#444444] hover:text-[#444444]/50 focus:outline-none" />
+        <Tab label="Questions" className="font-semibold rounded text-[#444444] hover:text-[#444444]/50 focus:outline-none" />
+        <Tab label="Check Answers" className="font-semibold rounded text-[#444444] hover:text-[#444444]/50 focus:outline-none" />
       </Tabs>
 
       <div className="space-y-6">

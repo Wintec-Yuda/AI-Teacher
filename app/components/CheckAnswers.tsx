@@ -81,7 +81,7 @@ const CheckAnswers: React.FC = () => {
             color="primary"
             onClick={handleResetted}
             disabled={loading}
-            className="font-semibold w-full py-2 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
+            className="font-semibold w-full py-2 bg-[#F4E5C2] hover:[#F4E5C2]/80 text-[#444444] rounded shadow-lg shadow-black/20"
           >
             {loading ? <CircularProgress size={24} /> : "Reset"}
           </Button>
@@ -91,7 +91,7 @@ const CheckAnswers: React.FC = () => {
             color="secondary"
             onClick={handleCheckAnswers}
             disabled={loading || !isAnswered}
-            className="font-semibold w-full py-2 bg-gradient-to-r from-teal-400 to-green-500 hover:from-teal-500 hover:to-green-600"
+            className="font-semibold w-full py-2 bg-[#F4E5C2] hover:[#F4E5C2]/80 text-[#444444] rounded shadow-lg shadow-black/20"
           >
             {loading ? <CircularProgress size={24} /> : "Submit Answers"}
           </Button>
@@ -99,17 +99,15 @@ const CheckAnswers: React.FC = () => {
       </Box>
 
       {feedback && (
-        <Paper elevation={3} className="p-6 mt-6 bg-white rounded-lg shadow-lg">
+        <Paper elevation={3} className="p-6 mt-6 bg-[#F4E5C2] rounded-lg shadow-lg">
           <Typography
             variant="h5"
             gutterBottom
-            className="text-gray-800 font-semibold"
+            className="text-[#444444] font-semibold"
           >
             Feedback:
           </Typography>
-          <Typography style={{ whiteSpace: "pre-wrap" }}>
-            <MarkdownWithProperHtml content={feedback} />
-          </Typography>
+          <MarkdownWithProperHtml content={feedback} />
         </Paper>
       )}
     </>

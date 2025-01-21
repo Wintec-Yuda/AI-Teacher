@@ -1,13 +1,17 @@
-import ReactMarkdown from 'react-markdown';
-import rehypeSanitize from 'rehype-sanitize'; 
-import { Typography } from '@mui/material';
+import MarkdownPreview from "@uiw/react-markdown-preview";
 
 const MarkdownWithProperHtml = ({ content }: { content: string }) => (
-  <Typography className='space-y-2'>
-    <ReactMarkdown rehypePlugins={[rehypeSanitize]}>
-      {content}
-    </ReactMarkdown>
-  </Typography>
+  <MarkdownPreview
+    source={content}
+    style={{
+      backgroundColor: "#F4E5C2",
+      padding: "1rem",
+      borderRadius: "0.5rem",
+      width: "100%",
+      boxSizing: "border-box",
+      color: "#444444",
+    }}
+  />
 );
 
 export default MarkdownWithProperHtml;
