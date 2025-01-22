@@ -51,7 +51,7 @@ const CheckAnswers: React.FC = () => {
       dispatch(setFeedback(data.data));
       dispatch(setIsResetted(true));
     } catch {
-      console.log("Failed to check answers");
+      alert("Failed to check answers");
     } finally {
       dispatch(setLoading(false));
     }
@@ -81,7 +81,7 @@ const CheckAnswers: React.FC = () => {
             color="primary"
             onClick={handleResetted}
             disabled={loading}
-            className="font-semibold w-full py-2 bg-[#F4E5C2] hover:[#F4E5C2]/80 text-[#444444] rounded shadow-lg shadow-black/20"
+            className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-[#F4E5C2] rounded shadow-lg shadow-black/20"
           >
             {loading ? <CircularProgress size={24} /> : "Reset"}
           </Button>
@@ -91,7 +91,7 @@ const CheckAnswers: React.FC = () => {
             color="secondary"
             onClick={handleCheckAnswers}
             disabled={loading || !isAnswered}
-            className="font-semibold w-full py-2 bg-[#F4E5C2] hover:[#F4E5C2]/80 text-[#444444] rounded shadow-lg shadow-black/20"
+            className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-[#F4E5C2] rounded shadow-lg shadow-black/20"
           >
             {loading ? <CircularProgress size={24} /> : "Submit Answers"}
           </Button>

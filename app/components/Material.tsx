@@ -21,11 +21,14 @@ import {
   setTopic,
   setSubTopic,
   addMaterial,
+  setMaterials,
 } from "../lib/redux/slices/materialSlice";
 import { GenerateMaterialPayload } from "../types/payload";
-import { setLoading } from "../lib/redux/slices/globalSlice";
+import { setActiveTab, setLoading } from "../lib/redux/slices/globalSlice";
 import axios from "axios";
 import { RootState } from "../types/state";
+import { setIsAnswered, setNumQuestions, setQuestions, setUserAnswers } from "../lib/redux/slices/questionSlice";
+import { setFeedback, setIsResetted } from "../lib/redux/slices/answerSlice";
 
 const Material: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -73,8 +76,10 @@ const Material: React.FC = () => {
 
       dispatch(addMaterial(data.data));
       setCurrentPage(materials.length + 1);
+
+      window.scrollTo({ top: 170, behavior: "smooth" });
     } catch {
-      console.log("Failed to generate material");
+      alert("Failed to generate material");
     } finally {
       dispatch(setLoading(false));
     }
@@ -82,6 +87,21 @@ const Material: React.FC = () => {
 
   const handleChangePage = (_: React.ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
+  };
+
+  const handleRestartLearning = () => {
+    dispatch(setMaterials([]));
+    dispatch(setTopic(""));
+    dispatch(setSubTopic(""));
+    dispatch(setSchoolLevel(""));
+    dispatch(setLanguage("indonesia"));
+    dispatch(setNumQuestions(5));
+    dispatch(setFeedback(""));
+    dispatch(setIsAnswered(false));
+    dispatch(setIsResetted(false));
+    dispatch(setActiveTab(0));
+    dispatch(setQuestions([]));
+    dispatch(setUserAnswers([]));
   };
 
   const dataMaterial: {
@@ -110,44 +130,48 @@ const Material: React.FC = () => {
 
   return (
     <>
-      <Box marginBottom={3}>
-        <FormControl fullWidth disabled={materials.length > 0 || loading}>
-          <InputLabel className="text-[#444444]">Language</InputLabel>
-          <Select
-            value={language}
-            onChange={handleChangeLanguage}
-            label="Select Language"
-            className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
-          >
-            <MenuItem value="indonesia" className="text-[#444444]">
-              Bahasa Indonesia
-            </MenuItem>
-            <MenuItem value="english" className="text-[#444444]">
-              English
-            </MenuItem>
-          </Select>
-        </FormControl>
-      </Box>
-
-      <Box marginBottom={3}>
-        <FormControl fullWidth disabled={materials.length > 0 || loading}>
-          <InputLabel className="text-[#444444]">School Level</InputLabel>
-          <Select
-            value={schoolLevel}
-            onChange={handleChangeSchoolLevel}
-            label="Select School Level"
-            className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
-          >
-            {Object.keys(data).map((level, index) => (
-              <MenuItem key={index} value={level} className="text-[#444444]">
-                {level}
+      {materials.length === 0 && (
+        <Box marginBottom={0}>
+          <FormControl fullWidth disabled={materials.length > 0 || loading}>
+            <InputLabel className="text-[#444444]">Language</InputLabel>
+            <Select
+              value={language}
+              onChange={handleChangeLanguage}
+              label="Select Language"
+              className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
+            >
+              <MenuItem value="indonesia" className="text-[#444444]">
+                Bahasa Indonesia
               </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
+              <MenuItem value="english" className="text-[#444444]">
+                English
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      )}
 
-      {schoolLevel && (
+      {materials.length === 0 && (
+        <Box marginBottom={3}>
+          <FormControl fullWidth disabled={materials.length > 0 || loading}>
+            <InputLabel className="text-[#444444]">School Level</InputLabel>
+            <Select
+              value={schoolLevel}
+              onChange={handleChangeSchoolLevel}
+              label="Select School Level"
+              className="text-[#444444] bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20"
+            >
+              {Object.keys(data).map((level, index) => (
+                <MenuItem key={index} value={level} className="text-[#444444]">
+                  {level}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+      )}
+
+      {schoolLevel && materials.length === 0 && (
         <Box marginBottom={3}>
           <FormControl fullWidth disabled={materials.length > 0 || loading}>
             <InputLabel className="text-[#444444]">Topic</InputLabel>
@@ -167,7 +191,7 @@ const Material: React.FC = () => {
         </Box>
       )}
 
-      {schoolLevel && topic && (
+      {schoolLevel && topic && materials.length === 0 && (
         <Box marginBottom={3}>
           <FormControl fullWidth>
             <InputLabel className="text-[#444444]">Sub Topic</InputLabel>
@@ -192,7 +216,7 @@ const Material: React.FC = () => {
         </Box>
       )}
 
-      {materials.length === 0 && (
+      {materials.length === 0 ? (
         <Box textAlign="center" marginBottom={3}>
           <Button
             variant="contained"
@@ -202,6 +226,18 @@ const Material: React.FC = () => {
             className="font-semibold bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20 text-[#444444]"
           >
             {loading ? <CircularProgress size={24} /> : "Generate Material"}
+          </Button>
+        </Box>
+      ) : (
+        <Box textAlign="center" marginBottom={3}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleRestartLearning}
+            disabled={loading}
+            className="font-semibold bg-[#444444] hover:bg-[#444444]/80 text-[#F4E5C2] rounded shadow-lg shadow-black/20"
+          >
+            {loading ? <CircularProgress size={24} /> : "Restart Learning"}
           </Button>
         </Box>
       )}
@@ -246,7 +282,7 @@ const Material: React.FC = () => {
                 color="primary"
                 onClick={handleGenerateMaterials}
                 disabled={loading || !topic || !subTopic}
-                className="font-semibold bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20 text-[#444444]"
+                className="font-semibold bg-[#444444] hover:bg-[#444444]/80 text-[#F4E5C2] rounded shadow-lg shadow-black/20"
               >
                 {loading ? <CircularProgress size={24} /> : "Continue Learning"}
               </Button>

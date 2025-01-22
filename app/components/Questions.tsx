@@ -75,7 +75,7 @@ const Questions: React.FC = () => {
 
       dispatch(setQuestions(questionsArray));
     } catch {
-      console.log("Failed to generate questions");
+      alert("Failed to generate questions");
     } finally {
       dispatch(setLoading(false));
     }
@@ -111,7 +111,7 @@ const Questions: React.FC = () => {
             color="secondary"
             onClick={handleGenerateQuestions}
             disabled={loading || materials.length === 0 || questions.length > 0}
-            className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-white rounded shadow-lg shadow-black/20"
+            className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-[#F4E5C2] rounded shadow-lg shadow-black/20"
           >
             {loading ? <CircularProgress size={24} /> : "Generate Questions"}
           </Button>
@@ -150,7 +150,7 @@ const Questions: React.FC = () => {
               color="primary"
               onClick={handleSureAnswers}
               disabled={loading || isAnswered}
-              className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-white rounded shadow-lg shadow-black/20"
+              className="font-semibold w-full py-2 bg-[#444444] hover:bg-[#444444]/80 text-[#F4E5C2] rounded shadow-lg shadow-black/20"
             >
               Sure with the answers!
             </Button>

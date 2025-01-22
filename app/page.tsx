@@ -17,8 +17,8 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="lg" className="bg-[#F4E5C2] min-h-screen p-6 rounded-lg shadow-lg">
-      <Typography variant="h3" align="center" gutterBottom className="font-bold bg-[#F4E5C2] hover:[#F4E5C2]/80 rounded shadow-lg shadow-black/20 text-[#444444]">
+    <Container maxWidth="lg" className="bg-[#D4C39D] min-h-screen p-6 rounded-lg shadow-lg">
+      <Typography variant="h3" align="center" gutterBottom className="font-bold bg-[#D4C39D] hover:[#D4C39D]/80 rounded shadow-xl shadow-black/20 text-[#444444]">
         AI Teacher
       </Typography>
       <Tabs
